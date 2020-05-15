@@ -1,2 +1,2 @@
 # BusRental
-Bus rental system for group 12
+Bus rental system for group 11
