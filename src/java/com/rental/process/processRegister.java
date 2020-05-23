@@ -6,6 +6,7 @@ package com.rental.process;
  * and open the template in the editor.
  */
 
+import com.rental.dao.DaoDriver;
 import com.rental.user.userStaff;
 import com.rental.user.userDriver;
 import com.rental.dao.DaoStaff;
@@ -56,15 +57,25 @@ public class processRegister extends HttpServlet {
         dri.setPassword(pw);
         dri.setRole(role);
         
+        //save into database by checking role first
         switch (role) {
             case "Driver":
                 {
                     int status = DaoStaff.save(staff);
                     if(status>0){
-                        out.println("<script type='text/javascript'>");
-                        out.println("alert('Successfully registered!')");
-                        out.println("location = 'login.jsp'");
-                        out.println("</script>");
+                        int statusDri = DaoDriver.saveDri();  //save driver's userID into driver table
+                        if(statusDri > 0){
+                            out.println("<script type='text/javascript'>");
+                            out.println("alert('Successfully registered!')");
+                            out.println("location = 'login.jsp'");
+                            out.println("</script>"); 
+                        }
+                        else{
+                            out.println("<script type='text/javascript'>");
+                            out.println("alert('Something went wrong when registering, contact admin for more info!')");
+                            out.println("location = 'login.jsp'");
+                            out.println("</script>");
+                        }                        
                     }
                     else{
                         out.println("<script type='text/javascript'>");

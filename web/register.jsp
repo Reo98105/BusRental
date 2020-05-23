@@ -51,7 +51,7 @@
 
                 <div class="form-group">
                     <label for="role" >Occupation list (select one):</label>
-                    <select class="form-control" name="role" onchange="display(this,'Driver');">
+                    <select class="form-control" name="role">
 			<option>Please select:</option>
                         <option value="PPH Staff">PPH Staff</option>
 			<option value="Driver">Driver</option>
@@ -59,15 +59,11 @@
                         <option value="HEPA Staff">HEPA Staff</option>
                     </select>
                 </div>
-				
-                <div class="form-group"id="Driver" style="display: none;"> 
-                    <label for="platnum">Plat Nunber</label>
-                    <input type="text" name="platnum" class="form-control" size="50" placeholder="Plat number">
-                </div>
 
-                <div class="form-group"> 
+                <div class="form-group">                    
                     <label for="username">Username</label>
-                    <input type="text" name="username" class="form-control" size="50" placeholder="S25587" required autofocus>
+                    <input type="text" name="username" class="form-control" size="50" placeholder="P25587" required autofocus>
+                    <small>*PPH staff start with P, Driver - D, Lecturer - L, HEPA Staff - H</small>
                 </div>
 
                 <div class="form-group">
@@ -78,16 +74,6 @@
                 <button class="btn btn-lg btn-success " type="submit" style="width: 15%">Sign Up</button><br><br>
             </form>
         </div>
-    </center>
-    <script>
-        function display(obj,driver) {
-            txt = obj.options[obj.selectedIndex].value;
-            document.getElementById(driver).style.display = 'none';
-
-            if ( txt.match(driver) ) {
-                document.getElementById(driver).style.display = 'block';
-            }
-        }
-</script>
+    </center>    
 </body>
 </html>

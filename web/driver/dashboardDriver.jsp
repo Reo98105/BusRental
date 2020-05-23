@@ -36,7 +36,7 @@
         <header>
             <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="dashboardLect.jsp" style="color:white">BusUMT</a>
+                    <a class="navbar-brand" href="dashboardDriver.jsp" style="color:white">BusUMT</a>
                     <ul class="navbar-nav">
                         <li class="nav-item-active"><a class="nav-link" href="..//processViewProfile">Profile</a></li>
                         <li class="nav-item-active"><a href="schedule.jsp" class="nav-link">Schedule</a></li>

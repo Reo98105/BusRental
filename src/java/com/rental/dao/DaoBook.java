@@ -11,6 +11,7 @@ import com.rental.connection.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,12 +30,14 @@ public class DaoBook {
         return con;
     }
     
-    //add book info into database
+    //add book info into bookDetail
     public static int save(userBooking ubook){
         int status = 0;
         try{
-            Connection con = DaoBook.getConnection();
-            PreparedStatement ps = con.prepareStatement("insert into bookdetail(userID, bookDate, dateNeed, purpose, location, pax) values(?,?,?,?,?,?)");
+            con = DaoBook.getConnection();
+            PreparedStatement ps = con.prepareStatement("insert into bookdetail "
+                    + "(userID, bookDate, bookDateNeed, depart, arriveback, purpose, location, pax) "
+                    + "values(?,?,?,?,?,?,?,?) ");
             
             ps.setInt(1, ubook.getID());
             ps.setString(2, ubook.getBookDate());
@@ -47,7 +50,7 @@ public class DaoBook {
             
             con.close();
         }
-        catch(Exception ex){
+        catch(SQLException ex){
             ex.printStackTrace();
         }
         return status;
@@ -58,7 +61,7 @@ public class DaoBook {
         List<userBooking> listBook = new ArrayList<userBooking>();
         
         try{
-            Connection con = DaoBook.getConnection();
+            con = DaoBook.getConnection();
             PreparedStatement ps = con.prepareStatement("select * from bookdetail where userID = ?");
             ps.setString(1, un);
             ResultSet rs = ps.executeQuery();
@@ -74,7 +77,7 @@ public class DaoBook {
                 listBook.add(book);
             }
         }
-        catch(Exception e){
+        catch(SQLException e){
             e.printStackTrace();
         }
         return listBook;
@@ -85,7 +88,7 @@ public class DaoBook {
         List<userBooking> listBook = new ArrayList<userBooking>();
         
         try{
-            Connection con = DaoBook.getConnection();
+            con = DaoBook.getConnection();
             PreparedStatement ps = con.prepareStatement("select user.fullname ,bookdetail.bookID, bookdetail.bookDate, bookdetail.purpose, bookdetail.approval from bookdetail inner join user on user.userID = bookdetail.userID where bookdetail.approval = '0'");
             ResultSet rs = ps.executeQuery();
             
@@ -99,7 +102,7 @@ public class DaoBook {
                 listBook.add(book);
             }
         }
-        catch(Exception e){
+        catch(SQLException e){
             e.printStackTrace();
         }
         return listBook;
@@ -110,7 +113,7 @@ public class DaoBook {
         userBooking book = new userBooking();
         
         try{
-            Connection con = DaoBook.getConnection();
+            con = DaoBook.getConnection();
             PreparedStatement ps = con.prepareStatement("select user.fullname , bookdetail.bookDate, bookdetail.DateNeed, bookdetail.purpose, bookdetail.location, bookdetail.pax, bookdetail.approval from bookdetail inner join user on user.userID = bookdetail.userID where bookdetail.bookID = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -125,7 +128,7 @@ public class DaoBook {
                 book.setStatus(rs.getInt("approval"));
             }
         }
-        catch(Exception e){
+        catch(SQLException e){
             e.printStackTrace();
         }
         return book;
@@ -135,7 +138,7 @@ public class DaoBook {
     public static int updateDetail(userBooking book){
         int status = 0;
         try{
-            Connection con = DaoBook.getConnection();
+            con = DaoBook.getConnection();
             PreparedStatement ps = con.prepareStatement("update bookdetail set approval = ? where bookID = ?");
             ps.setInt(1, book.getStatus()); 
             ps.setInt(2, book.getBookID());     
@@ -144,7 +147,7 @@ public class DaoBook {
             
             con.close();
         }
-        catch(Exception e){
+        catch(SQLException e){
             e.printStackTrace();
         }
         return status;
@@ -155,7 +158,7 @@ public class DaoBook {
         List<userBooking> listBook = new ArrayList<userBooking>();
         
         try{
-            Connection con = DaoBook.getConnection();
+            con = DaoBook.getConnection();
             PreparedStatement ps = con.prepareStatement("select user.fullname, bookdetail.bookID, bookdetail.dateNeed, bookdetail.location, bookdetail.pax, bookdetail.approval from bookdetail inner join user on user.userID = bookdetail.userID where bookdetail.approval = '1'");
             ResultSet rs = ps.executeQuery();
             
@@ -170,7 +173,7 @@ public class DaoBook {
                 listBook.add(book);
             }
         }
-        catch(Exception e){
+        catch(SQLException e){
             e.printStackTrace();
         }
         return listBook;

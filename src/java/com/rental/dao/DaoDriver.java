@@ -12,6 +12,7 @@ import com.rental.user.userDriver;
 import com.rental.connection.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 /**
  *
@@ -26,23 +27,18 @@ public class DaoDriver {
         return con;
     }
     
-    //add hepa into database
-    public static int save(userDriver dri){
+    //add driver's userID into driver table by select most recent record from user table
+    public static int saveDri(){
         int status = 0;
         try{
-            Connection con = DaoDriver.getConnection();
-            PreparedStatement ps = con.prepareStatement("insert into user(u_fname, u_name, u_password, u_role) values(?,?,?,?)");
-            
-            ps.setString(1, dri.getUsername());
-            ps.setString(2, dri.getName());
-            ps.setString(3, dri.getPassword());
-            ps.setString(4, dri.getRole());
+            con = DaoDriver.getConnection();
+            PreparedStatement ps = con.prepareStatement("insert into driver (userID) select MAX(userID) from user where role = 'Driver'");
             
             status = ps.executeUpdate();
             
             con.close();
         }
-        catch(Exception ex){
+        catch(SQLException ex){
             ex.printStackTrace();
         }
         return status;

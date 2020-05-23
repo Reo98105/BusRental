@@ -102,7 +102,7 @@ public class processLogin extends HttpServlet {
                     out.println("<script type='text/javascript'>");
                     out.println("alert('Login Successful!')");
                     out.println("</script>");
-                    response.sendRedirect("hepa/dashboardDriver.jsp");
+                    response.sendRedirect("driver/dashboardDriver.jsp");
                 }
                 else{
                     out.println("<script type='text/javascript'>");

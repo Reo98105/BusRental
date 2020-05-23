@@ -11,7 +11,7 @@ package com.rental.user;
  * @author Reo
  */
 public class userBooking {
-    private String  bookDate, dateNeed, purpose, location, fullname;
+    private String  bookDate, dateNeed, depart, arriveback, purpose, location, fullname;
     private int id, pax, status, bookID;
 
     public String getBookDate(){
@@ -36,6 +36,22 @@ public class userBooking {
 
     public void setPurpose(String purpose) {
         this.purpose = purpose;
+    }
+    
+    public String getDepart() {
+        return depart;
+    }
+
+    public void setDepart(String depart) {
+        this.depart = depart;
+    }
+    
+    public String getArriveback() {
+        return arriveback;
+    }
+
+    public void setArriveback(String arriveback) {
+        this.arriveback = arriveback;
     }
     
     public String getLocation(){
