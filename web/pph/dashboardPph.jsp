@@ -36,10 +36,10 @@
         <header>
             <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="dashboardLect.jsp" style="color:white">BusUMT</a>
+                    <a class="navbar-brand" href="dashboardPph.jsp" style="color:white">BusUMT</a>
                     <ul class="navbar-nav">
                         <li class="nav-item-active"><a class="nav-link" href="..//processViewProfile">Profile</a></li>
-                        <li class="nav-item-active"><a href="viewBookRequest.jsp" class="nav-link">Bus Booking List</a></li>
+                        <li class="nav-item-active"><a href="pph/viewBookRequest.jsp" class="nav-link">Bus Booking List</a></li>
                         <li class="nav-item-active" ><a href="#" class="nav-link">|</a></li>
                         <li class="nav-item-active"><a href="..//processLogout" class="nav-link">Logout</a></li>
                     </ul>

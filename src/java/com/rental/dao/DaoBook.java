@@ -42,9 +42,11 @@ public class DaoBook {
             ps.setInt(1, ubook.getID());
             ps.setString(2, ubook.getBookDate());
             ps.setString(3, ubook.getDateNeed());
-            ps.setString(4, ubook.getPurpose());
-            ps.setString(5, ubook.getLocation());
-            ps.setInt(6, ubook.getPax());
+            ps.setString(4, ubook.getDepart());
+            ps.setString(5, ubook.getArriveback());
+            ps.setString(6, ubook.getPurpose());
+            ps.setString(7, ubook.getLocation());
+            ps.setInt(8, ubook.getPax());
             
             status = ps.executeUpdate();
             

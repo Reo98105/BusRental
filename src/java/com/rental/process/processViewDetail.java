@@ -14,10 +14,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author type001
+ * @author Reo
  */
 public class processViewDetail extends HttpServlet {
 
@@ -38,6 +39,10 @@ public class processViewDetail extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         userBooking book = DaoBook.getBookIDDetail(id);
         
+        //get current user's role
+        HttpSession session = request.getSession(false);
+        String role = (String)session.getAttribute("role");
+        
         //forward data get from database to intended page
         request.setAttribute("bookID", id);
         request.setAttribute("username", book.getFullname());
@@ -47,10 +52,19 @@ public class processViewDetail extends HttpServlet {
         request.setAttribute("location", book.getLocation());
         request.setAttribute("pax", book.getPax());
         
-        RequestDispatcher rd = request.getRequestDispatcher("hepa/viewRequestDetail.jsp");
-        if(rd != null){
-            rd.forward(request, response);
+        if(role.equals("hepa")){
+            RequestDispatcher rd = request.getRequestDispatcher("hepa/viewRequestDetail.jsp");
+            if(rd != null){
+                rd.forward(request, response);
+            }
         }
+        else if(role.equals("pph")){
+            RequestDispatcher rd = request.getRequestDispatcher("pph/viewRequestDetail.jsp");
+            if(rd != null){
+                rd.forward(request, response);
+            }
+        }
+        
         
         try {
             /* TODO output your page here. You may use following sample code.
