@@ -52,23 +52,23 @@
                 </tr>
                 <tr>
                     <th align="left">Booking Date: </th>
-                    <td><input type="hidden" name="fname" value="${bd}"/>${bd}</td>
+                    <td><input type="hidden" name="bd" value="${bd}"/>${bd}</td>
                 </tr>
                 <tr>
                     <th align="left">Date Needed: </th>
-                    <td><input type="hidden" name="fname" value="${dn}"/>${dn}</td>
+                    <td><input type="hidden" name="dn" value="${dn}"/>${dn}</td>
                 </tr>
                 <tr>
                     <th align="left">Purpose: </th>
-                    <td><input type="hidden" name="fname" value="${purpose}"/>${purpose}</td>
+                    <td><input type="hidden" name="purpose" value="${purpose}"/>${purpose}</td>
                 </tr>
                 <tr>
                     <th align="left">Location: </th>
-                    <td><input type="hidden" name="fname" value="${location}"/>${location}</td>
+                    <td><input type="hidden" name="location" value="${location}"/>${location}</td>
                 </tr>
                 <tr>
                     <th align="left">Number of Passenger: </th>
-                    <td><input type="hidden" name="fname" value="${pax}"/>${pax}</td>
+                    <td><input type="hidden" name="pax" value="${pax}"/>${pax}</td>
                 </tr>
                 <th align='left'>Status: </th>
                 <td>

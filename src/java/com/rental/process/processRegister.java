@@ -50,13 +50,6 @@ public class processRegister extends HttpServlet {
         staff.setPassword(pw);
         staff.setRole(role);
         
-        //set driver info
-        userDriver dri = new userDriver();
-        dri.setName(name);
-        dri.setUsername(un);
-        dri.setPassword(pw);
-        dri.setRole(role);
-        
         //save into database by checking role first
         switch (role) {
             case "Driver":

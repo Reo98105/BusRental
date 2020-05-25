@@ -40,6 +40,14 @@
         <servlet-name>processUpdatePass</servlet-name>
         <servlet-class>com.rental.process.processUpdatePass</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>processVerifyDri</servlet-name>
+        <servlet-class>com.rental.process.processVerifyDri</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>processUpdateDri</servlet-name>
+        <servlet-class>com.rental.process.processUpdateDri</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>processRegister</servlet-name>
         <url-pattern>/processRegister</url-pattern>
@@ -85,6 +93,14 @@
             login.jsp
         </welcome-file>
     </welcome-file-list>
+    <servlet-mapping>
+        <servlet-name>processVerifyDri</servlet-name>
+        <url-pattern>/processVerifyDri</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processUpdateDri</servlet-name>
+        <url-pattern>/processUpdateDri</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

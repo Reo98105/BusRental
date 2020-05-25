@@ -98,11 +98,8 @@ public class processLogin extends HttpServlet {
                 if(DaoLogin.validateStaff(un, pw)){
                     HttpSession session = request.getSession();
                     session.setAttribute("un", un);
-                    session.setAttribute("role", role);
-                    out.println("<script type='text/javascript'>");
-                    out.println("alert('Login Successful!')");
-                    out.println("</script>");
-                    response.sendRedirect("driver/dashboardDriver.jsp");
+                    session.setAttribute("role", role);                    
+                    response.sendRedirect("processVerifyDri");
                 }
                 else{
                     out.println("<script type='text/javascript'>");

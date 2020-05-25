@@ -1,14 +1,11 @@
-package com.rental.process;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package com.rental.process;
 
 import com.rental.dao.DaoDriver;
-import com.rental.user.userStaff;
-import com.rental.dao.DaoStaff;
 import com.rental.user.userDriver;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Reo
  */
-public class processViewProfile extends HttpServlet {
+public class processVerifyDri extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,71 +36,38 @@ public class processViewProfile extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        //get value from 
         HttpSession session = request.getSession(false);
-        String currentUser = (String)session.getAttribute("un");
-        String currentRole = (String)session.getAttribute("role");
+        String un = (String)session.getAttribute("un");     //get current driver's username
         
-        if(currentRole.equals("driver")){
-            userDriver dri = DaoDriver.getDriver(currentUser);
-            
-            request.setAttribute("username",dri.getUsername());
-            request.setAttribute("fname",dri.getFname());
-            request.setAttribute("role",dri.getRole());
-            request.setAttribute("platNo",dri.getPlat());
-            request.setAttribute("capacity",dri.getCap());
-            
-            RequestDispatcher rd = request.getRequestDispatcher("driver/viewProfileDriver.jsp");
-            if(rd != null){
-                rd.forward(request, response);
-            }
+        //to get status of current driver
+        userDriver driver = DaoDriver.getDriverStatus(un);        
+        int status = driver.getStatus();
+        out.println(status);
+        
+        //check driver profile status (updated platNo & capacity or not)
+        if(status == 0){
+            out.println("<script type='text/javascript'>");
+            out.println("alert('Please update your details!')");
+            out.println("location = 'driver/viewUpdateDri.jsp'");
+            out.println("</script>");
         }
-        else if(currentRole.equals("pph")){
-            userStaff staff = DaoStaff.getUser(currentUser);
-            
-            request.setAttribute("username",staff.getUsername());
-            request.setAttribute("name",staff.getName());
-            request.setAttribute("role",staff.getRole());
-            
-            RequestDispatcher rd = request.getRequestDispatcher("pph/viewProfilePph.jsp");
-            if(rd != null){
-                rd.forward(request, response);
-            }
-        }
-        else if(currentRole.equals("hepa")){
-            userStaff staff = DaoStaff.getUser(currentUser);
-            
-            request.setAttribute("username",staff.getUsername());
-            request.setAttribute("name",staff.getName());
-            request.setAttribute("role",staff.getRole());
-            
-            RequestDispatcher rd = request.getRequestDispatcher("hepa/viewProfile.jsp");
-            if(rd != null){
-                rd.forward(request, response);
-            }
-        }
-        else if(currentRole.equals("lecturer")){
-            userStaff staff = DaoStaff.getUser(currentUser);
-            
-            request.setAttribute("username",staff.getUsername());
-            request.setAttribute("name",staff.getName());
-            request.setAttribute("role",staff.getRole());
-            
-            RequestDispatcher rd = request.getRequestDispatcher("lect/viewProfile.jsp");
-            if(rd != null){
-                rd.forward(request, response);
-            }
+        else {
+            out.println("<script type='text/javascript'>");
+            out.println("alert('Login successful!')");
+            out.println("</script>");
+            RequestDispatcher rd = request.getRequestDispatcher("driver/dashboardDriver.jsp");
+            rd.forward(request, response);
         }
         
         try {
-            /* TODO output your page here. You may use following sample code. 
+            /* TODO output your page here. You may use following sample code.
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet processViewProfile</title>");            
+            out.println("<title>Servlet processVerifyDri</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet processViewProfile at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet processVerifyDri at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");*/
         }

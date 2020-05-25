@@ -41,7 +41,7 @@
                         <li class="nav-item-active"><a class="nav-link" href="..//processViewProfile">Profile</a></li>
                         <li class="nav-item-active"><a href="schedule.jsp" class="nav-link">Schedule</a></li>
                         <li class="nav-item-active" ><a href="#" class="nav-link">|</a></li>
-                        <li class="nav-item-active"><a href="logout" class="nav-link">Logout</a></li>
+                        <li class="nav-item-active"><a href="..//processLogout" class="nav-link">Logout</a></li>
                     </ul>
                 </div>
             </nav> 
@@ -55,16 +55,22 @@
             <tr>
                 <td><h6><label for="username">Username</label></h6></td>
                 <td>${username}</td>
-
             </tr>
             <tr>
                 <td><h6><label for="fullname">Fullname:</label></h6></td>
                 <td>${name}</td>
-
             </tr>
             <tr>
                 <td><h6><label for="role">Role:</label></h6></td>
                 <td>${role}</td>                
+            </tr>
+            <tr>
+                <td><h6><label for="role">Bus plat no:</label></h6></td>
+                <td>${platNo}</td>                
+            </tr>
+            <tr>
+                <td><h6><label for="role">Bus capacity:</label></h6></td>
+                <td>${capacity}</td>                
             </tr>
         </table>
             <br><br><br>

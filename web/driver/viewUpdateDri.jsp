@@ -1,4 +1,5 @@
 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -9,7 +10,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-        <title>Update Password</title>
+        <title>Bus rental - update bus detail</title>
 
         <style>
             body{
@@ -42,53 +43,56 @@
                     </ul>
                 </div>
             </nav> 
-        </header> 
+        </header>
+        
+        <jsp:useBean id="driverDao" class="com.rental.dao.DaoDriver"/>
+        <c:set var="driver" value="${driverDao.getDriver(un)}"/>
 
     <center>
         <br>
-        <h2>Change Password</h2>
+        <h2>Update bus detail</h2>
         <br>
         <div class="form-group">
-            <form action="..//processUpdatePass" method="post">
+            <form action="..//processUpdateDri" method="post">
                 <table>
                     <tr>
                         <td align-text="left">
                             <label for="username">Username:</label>
                         </td>
-                        <td>${username}</td>
+                        <td>${un}</td>
                     </tr>
                     <tr>
                         <td align-text="left">
                             <label for="fullname">Full Name:</label>
                         </td>
-                        <td>${name}</td>
+                        <td>${driver.getFname()}</td>
                     </tr>
                     <tr>
                         <td align-text="left">
                             <label for="role">Role:</label>
                         </td>
-                        <td>${role}</td>
+                        <td>${driver.getRole()}</td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <label for="current" >Current Password</label>
-                            <input type="password" name="current"  class="form-control" size="20" placeholder="Current Password" required><br>
+                            <label for="current" >Bus plat number:</label>
+                            <input type="text" name="platNo"  class="form-control" size="20" placeholder="TBH 1414" required><br>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <label for="new" >New Password</label>
-                            <input type="password" name="new" class="form-control" size="20" placeholder="New Password" required><br>
+                            <label for="new" >Bus capacity:</label>
+                            <input type="text" name="capacity" class="form-control" size="20" placeholder="45" required><br>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <label for="re" >Retype Password</label>
-                            <input type="password" name="re" class="form-control" size="20" placeholder="Retype Password" required><br>
+                        <td>
+                            <input type="hidden" name="driID" value="${driver.getDriID()}"/>
+                            <input type="hidden" name="cond" value="1"/>
                         </td>
                     </tr>
                 </table>
-            <button class="btn btn-lg btn-success" style="width: 20%">Change</button>
+            <button class="btn btn-lg btn-success" style="width: 20%">Update</button>
         </form>
         </div>
     </center>

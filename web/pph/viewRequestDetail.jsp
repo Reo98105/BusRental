@@ -43,6 +43,14 @@
             </nav> 
         </header> 
         <br><br>
+        <input type="hidden" name="dayID" value="test"/>
+        <c:set var="bookDate" value="${bd}"/>
+        <script type = "text/javascript">
+            var bookDate = '${bd}';
+            var dt = new Date("bookDate");
+            document.write("getDay() : " + dt.getDay() );
+            document.getElementById("dayID").value = dt.getDay();
+        </script>
         <form action="..//processUpdateDetail" method="post">
             <table border="0" align="center">
                 <tr>
@@ -51,21 +59,32 @@
                 </tr>
                 <tr>
                     <th align="left">Booking Date: </th>
-                    <td><input type="hidden" name="fname" value="${bd}"/>${bd}</td>
+                    <td><input type="hidden" name="bd" value="${bookDate}"/>${bookDate}</td>
                 </tr>
                 <tr>
                     <th align="left">Date Needed: </th>
-                    <td><input type="hidden" name="fname" value="${dn}"/>${dn}</td>
+                    <td><input type="hidden" name="dn" value="${dn}"/>${dn}</td>
                 </tr>
                 <tr>
                     <th align="left">Location: </th>
-                    <td><input type="hidden" name="fname" value="${location}"/>${location}</td>
+                    <td><input type="hidden" name="location" value="${location}"/>${location}</td>
                 </tr>
                 <tr>
                     <th align="left">Number of Passenger: </th>
-                    <td><input type="hidden" name="fname" value="${pax}"/>${pax}</td>
+                    <td><input type="hidden" name="pax" value="${pax}"/>${pax}</td>
                 </tr>
-                <th align='left'>List of available busses: </th>                
+                <tr>
+                    <th align='left'>List of available busses: </th>
+                    <c:set var="count" value="0"/>
+                    <c:set var="bookID" value="${param.id}"/>
+                    <jsp:useBean id="driDao" class="com.rental.dao.DaoDriver"/>
+                    <c:forEach items="${driDao.getFreeDriver(bookID, dayID)}" var="list">
+                    <input type="checkbox" name="${count}" value="<c:out value="${list.getDriID()}"/>"/>
+                    <label for="${count}"><c:out value="${list.getUsername()}"/></label>  <%--driver name here--%>
+                    <label for="${count}"><c:out value="${list.getCap()}"/></label>  <%--pax here--%>
+                    <c:set var="count" value="${count + 1}"/>
+                    </c:forEach>
+                </tr>
             </table>
             <br>
             <center>

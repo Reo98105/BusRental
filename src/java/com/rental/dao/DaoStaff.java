@@ -13,6 +13,7 @@ import com.rental.connection.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class DaoStaff {
     public static int save(userStaff staff){
         int status = 0;
         try{
-            Connection con = DaoStaff.getConnection();
+            con = DaoStaff.getConnection();
             PreparedStatement ps = con.prepareStatement("insert into user(username, fullname, password, role) values(?,?,?,?)");
             
             ps.setString(1, staff.getUsername());
@@ -46,7 +47,7 @@ public class DaoStaff {
             
             con.close();
         }
-        catch(Exception ex){
+        catch(SQLException ex){
             ex.printStackTrace();
         }
         return status;
@@ -56,7 +57,7 @@ public class DaoStaff {
     public static userStaff getUser(String un){
         userStaff staff = new userStaff();
         try{
-            Connection con = DaoStaff.getConnection();
+            con = DaoStaff.getConnection();
             PreparedStatement ps = con.prepareStatement("select * from user where username = ?");
             
             ps.setString(1, un);
@@ -69,7 +70,7 @@ public class DaoStaff {
             }
             con.close();
         }
-        catch(Exception e){
+        catch(SQLException e){
             e.printStackTrace();
         }
         return staff;
@@ -79,7 +80,7 @@ public class DaoStaff {
     public static userStaff getUserID(String un){
         userStaff staff = new userStaff();
         try{
-            Connection con = DaoStaff.getConnection();
+            con = DaoStaff.getConnection();
             PreparedStatement ps = con.prepareStatement("select userID from user where username = ?");
             
             ps.setString(1, un);
@@ -90,7 +91,7 @@ public class DaoStaff {
             }
             con.close();
         }
-        catch(Exception e){
+        catch(SQLException e){
             e.printStackTrace();
         }
         return staff;
@@ -100,7 +101,7 @@ public class DaoStaff {
     public static List<userStaff> getUsername(int id){
         List<userStaff> listStaff = new ArrayList<userStaff>();
         try{
-            Connection con = DaoStaff.getConnection();
+            con = DaoStaff.getConnection();
             PreparedStatement ps = con.prepareStatement("select username from bookdetail inner join user where userID = ?");
             
             ps.setInt(1, id);
@@ -113,7 +114,7 @@ public class DaoStaff {
             }
             con.close();
         }
-        catch(Exception e){
+        catch(SQLException e){
             e.printStackTrace();
         }
         return listStaff;
@@ -123,7 +124,7 @@ public class DaoStaff {
     public static int update(userStaff staff){
         int status = 0;
         try{
-            Connection con = DaoStaff.getConnection();
+            con = DaoStaff.getConnection();
             PreparedStatement ps = con.prepareStatement("update user set password = ? where username = ?");
             ps.setString(1, staff.getPassword());
             ps.setString(2, staff.getUsername());
@@ -132,7 +133,7 @@ public class DaoStaff {
             
             con.close();
         }
-        catch(Exception e){
+        catch(SQLException e){
             e.printStackTrace();
         }
         return status;
@@ -142,7 +143,7 @@ public class DaoStaff {
     public static userStaff getPassword(String un){
         userStaff staff = new userStaff();
         try{
-            Connection con = DaoStaff.getConnection();
+            con = DaoStaff.getConnection();
             PreparedStatement ps = con.prepareStatement("select password from user where username = ?");
             
             ps.setString(1, un);
@@ -153,7 +154,7 @@ public class DaoStaff {
             }
             con.close();
         }
-        catch(Exception e){
+        catch(SQLException e){
             e.printStackTrace();
         }
         return staff;

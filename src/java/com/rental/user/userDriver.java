@@ -11,14 +11,15 @@ package com.rental.user;
  * @author Teoh
  */
 public class userDriver {
-    private String  name, username, password, plat, role;
+    private String  id, username, fname, password, plat, role;
+    private int cap, status;
 
-    public String getName(){
-        return name;
+    public String getDriID(){
+        return id;
     }
     
-    public void setName(String name){
-        this.name = name;
+    public void setDriID(String id){
+        this.id = id;
     }
     
     public String getUsername() {
@@ -27,6 +28,14 @@ public class userDriver {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+    
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
     }
 
     public String getPassword() {
@@ -51,5 +60,21 @@ public class userDriver {
     
     public void setRole(String role){
         this.role = role;
+    }
+    
+    public int getCap(){
+        return cap;
+    }
+    
+    public void setCap(int cap){
+        this.cap = cap;
+    }
+    
+    public int getStatus(){
+        return status;
+    }
+    
+    public void setStatus(int status){
+        this.status = status;
     }
 }
