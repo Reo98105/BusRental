@@ -9,7 +9,6 @@ import com.rental.dao.DaoDriver;
 import com.rental.user.userDriver;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -54,9 +53,8 @@ public class processVerifyDri extends HttpServlet {
         else {
             out.println("<script type='text/javascript'>");
             out.println("alert('Login successful!')");
+            out.println("location = 'driver/dashboardDriver.jsp'");
             out.println("</script>");
-            RequestDispatcher rd = request.getRequestDispatcher("driver/dashboardDriver.jsp");
-            rd.forward(request, response);
         }
         
         try {

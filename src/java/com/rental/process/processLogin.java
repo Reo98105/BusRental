@@ -50,8 +50,8 @@ public class processLogin extends HttpServlet {
                     session.setAttribute("role", role);
                     out.println("<script type='text/javascript'>");
                     out.println("alert('Login Successful!')");
+                    out.println("location = 'lect/dashboardLect.jsp'");
                     out.println("</script>");
-                    response.sendRedirect("lect/dashboardLect.jsp");
                 }
                 else{
                     out.println("<script type='text/javascript'>");
@@ -67,8 +67,8 @@ public class processLogin extends HttpServlet {
                     session.setAttribute("role", role);
                     out.println("<script type='text/javascript'>");
                     out.println("alert('Login Successful!')");
+                    out.println("location = 'hepa/dashboardHepa.jsp'");
                     out.println("</script>");
-                    response.sendRedirect("hepa/dashboardHepa.jsp");
                 }
                 else{
                     out.println("<script type='text/javascript'>");
@@ -84,8 +84,8 @@ public class processLogin extends HttpServlet {
                     session.setAttribute("role", role);
                     out.println("<script type='text/javascript'>");
                     out.println("alert('Login Successful!')");
+                    out.println("location = 'pph/dashboardPph.jsp'");
                     out.println("</script>");
-                    response.sendRedirect("pph/dashboardPph.jsp");
                 }
                 else{
                     out.println("<script type='text/javascript'>");

@@ -43,14 +43,6 @@
             </nav> 
         </header> 
         <br><br>
-        <input type="hidden" name="dayID" value="test"/>
-        <c:set var="bookDate" value="${bd}"/>
-        <script type = "text/javascript">
-            var bookDate = '${bd}';
-            var dt = new Date("bookDate");
-            document.write("getDay() : " + dt.getDay() );
-            document.getElementById("dayID").value = dt.getDay();
-        </script>
         <form action="..//processUpdateDetail" method="post">
             <table border="0" align="center">
                 <tr>
@@ -59,11 +51,19 @@
                 </tr>
                 <tr>
                     <th align="left">Booking Date: </th>
-                    <td><input type="hidden" name="bd" value="${bookDate}"/>${bookDate}</td>
+                    <td><input type="hidden" name="bd" value="${bd}"/>${bd}</td>
                 </tr>
                 <tr>
                     <th align="left">Date Needed: </th>
-                    <td><input type="hidden" name="dn" value="${dn}"/>${dn}</td>
+                    <td><input type="hidden" name="dateNeed" id="dateNeed" value="${dn}"/>${dn}</td>
+                </tr>
+                <tr>
+                    <th align="left">Depart time: </th>
+                    <td><input type="hidden" name="dn" value="${depart}"/>${depart}</td>
+                </tr>
+                <tr>
+                    <th align="left">Arrive back: </th>
+                    <td><input type="hidden" name="dn" value="${ab}"/>${ab}</td>
                 </tr>
                 <tr>
                     <th align="left">Location: </th>
@@ -74,6 +74,13 @@
                     <td><input type="hidden" name="pax" value="${pax}"/>${pax}</td>
                 </tr>
                 <tr>
+                    <input type="hidden" id="dayID" name="dayID" value=""/>
+                    <script type = "text/javascript">
+                        var dateNeed = document.getElementById("dateNeed").value;
+                        var dt = new Date(dateNeed);
+                        var dayofdate = dt.getDay();
+                        document.getElementById("dayID").value = dayofdate;
+                    </script>
                     <th align='left'>List of available busses: </th>
                     <c:set var="count" value="0"/>
                     <c:set var="bookID" value="${param.id}"/>

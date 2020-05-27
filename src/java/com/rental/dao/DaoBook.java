@@ -71,7 +71,9 @@ public class DaoBook {
             while(rs.next()){
                 userBooking book = new userBooking();
                 book.setBookdate(rs.getString("bookDate"));
-                book.setDateNeed(rs.getString("dateNeed"));
+                book.setDateNeed(rs.getString("bookDateNeed"));
+                book.setDepart(rs.getString("depart"));
+                book.setArriveback(rs.getString("arriveback"));
                 book.setPurpose(rs.getString("purpose"));
                 book.setLocation(rs.getString("location"));
                 book.setPax(rs.getInt("pax"));
@@ -91,7 +93,9 @@ public class DaoBook {
         
         try{
             con = DaoBook.getConnection();
-            PreparedStatement ps = con.prepareStatement("select user.fullname ,bookdetail.bookID, bookdetail.bookDate, bookdetail.purpose, bookdetail.approval from bookdetail inner join user on user.userID = bookdetail.userID where bookdetail.approval = '0'");
+            PreparedStatement ps = con.prepareStatement("select user.fullname ,bookdetail.bookID, bookdetail.bookDate, bookdetail.purpose, bookdetail.approval "
+                    + "from bookdetail inner join user on user.userID = bookdetail.userID "
+                    + "where bookdetail.approval = '0'");
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
@@ -116,14 +120,18 @@ public class DaoBook {
         
         try{
             con = DaoBook.getConnection();
-            PreparedStatement ps = con.prepareStatement("select user.fullname , bookdetail.bookDate, bookdetail.DateNeed, bookdetail.purpose, bookdetail.location, bookdetail.pax, bookdetail.approval from bookdetail inner join user on user.userID = bookdetail.userID where bookdetail.bookID = ?");
+            PreparedStatement ps = con.prepareStatement("select user.fullname , bookdetail.bookDate, bookdetail.bookDateNeed, bookdetail.depart, bookdetail.arriveback, bookdetail.purpose, bookdetail.location, bookdetail.pax, bookdetail.approval "
+                    + "from bookdetail inner join user on user.userID = bookdetail.userID "
+                    + "where bookdetail.bookID = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             
             if(rs.next()){
                 book.setFullname(rs.getString("fullname"));
                 book.setBookdate(rs.getString("bookDate"));
-                book.setDateNeed(rs.getString("dateNeed"));
+                book.setDateNeed(rs.getString("bookDateNeed"));
+                book.setDepart(rs.getString("depart"));
+                book.setArriveback(rs.getString("arriveback"));
                 book.setPurpose(rs.getString("purpose"));
                 book.setLocation(rs.getString("location"));
                 book.setPax(rs.getInt("pax"));
@@ -161,14 +169,16 @@ public class DaoBook {
         
         try{
             con = DaoBook.getConnection();
-            PreparedStatement ps = con.prepareStatement("select user.fullname, bookdetail.bookID, bookdetail.dateNeed, bookdetail.location, bookdetail.pax, bookdetail.approval from bookdetail inner join user on user.userID = bookdetail.userID where bookdetail.approval = '1'");
+            PreparedStatement ps = con.prepareStatement("select user.fullname, bookdetail.bookID, bookdetail.bookDateNeed, bookdetail.location, bookdetail.pax, bookdetail.approval "
+                    + "from bookdetail inner join user on user.userID = bookdetail.userID "
+                    + "where bookdetail.approval = '1'");
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
                 userBooking book = new userBooking();
                 book.setBookID(rs.getInt("bookID"));
                 book.setFullname(rs.getString("fullname"));
-                book.setDateNeed(rs.getString("dateNeed"));
+                book.setDateNeed(rs.getString("bookDateNeed"));
                 book.setLocation(rs.getString("location"));
                 book.setPax(rs.getInt("pax"));
                 book.setStatus(rs.getInt("approval"));

@@ -41,6 +41,8 @@ public class processBooking extends HttpServlet {
          //get value from booking form
         String bd = request.getParameter("bookDate");
         String dn = request.getParameter("dateNeed");
+        String depart = request.getParameter("depart");
+        String ab = request.getParameter("arriveback");
         String purpose = request.getParameter("purpose");
         String location = request.getParameter("location");
         int pax = Integer.parseInt(request.getParameter("pax"));
@@ -56,6 +58,8 @@ public class processBooking extends HttpServlet {
         ubook.setID(currentID);
         ubook.setBookdate(bd);
         ubook.setDateNeed(dn);
+        ubook.setDepart(depart);
+        ubook.setArriveback(ab);
         ubook.setPurpose(purpose);
         ubook.setLocation(location);
         ubook.setPax(pax);
@@ -71,7 +75,7 @@ public class processBooking extends HttpServlet {
         else{
             out.println("<script type='text/javascript'>");
             out.println("alert('Something went wrong! Please retry later!')");
-            out.println("location = 'bookBus.jsp'");
+            out.println("location = 'lect/bookBus.jsp'");
             out.println("</script>");
         }
         

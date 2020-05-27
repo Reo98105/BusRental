@@ -40,10 +40,11 @@ public class processUpdateDri extends HttpServlet {
         
         int status = DaoDriver.updateBus(platNo, capacity, driID, cond);
         if(status > 0){
+            DaoDriver.saveSchedule(driID);            
             out.println("<script type='text/javascript'>");
-            out.println("alert('Successfully updated!')");
+            out.println("alert('Details successfully updated!')");
+            out.println("location = 'driver/dashboardDriver.jsp'");
             out.println("</script>");
-            response.sendRedirect("driver/dashboardDriver.jsp");
         }
         else{
             out.println("<script type='text/javascript'>");

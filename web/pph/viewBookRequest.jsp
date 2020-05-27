@@ -52,6 +52,8 @@
                 <tr>
                     <th onclick="sortTable(1)">Name of Requester</th>
                     <th onclick="sortTable(2)">Date Needed</th>
+                    <th onclick="sortTable(2)">Depart time</th>
+                    <th onclick="sortTable(2)">Arrive back</th>
                     <th onclick="sortTable(3)">Location</th>
                     <th onclick="sortTable(4)">Number of Passenger</th>
                     <th onclick="sortTable(5)">Action</th>
@@ -66,6 +68,8 @@
                             <tr>
                                 <td><c:out value="${bookDetail.getFullname()}"/></td>
                                 <td><c:out value="${bookDetail.getDateNeed()}"/></td>
+                                <td><c:out value="${bookDetail.getDepart()}"/></td>
+                                <td><c:out value="${bookDetail.getArriveback()}"/></td>
                                 <td><c:out value="${bookDetail.getLocation()}"/></td>
                                 <td><c:out value="${bookDetail.getPax()}"/></td>
                                 <td><a href='..//processViewDetail?id=<c:out value="${bookDetail.getBookID()}"/>'>Assign Driver</a></td>

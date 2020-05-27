@@ -57,6 +57,8 @@
                     <tr>
                         <th align='center'>Booked Date</th>
                         <th align='center'>Date Needed</th>
+                        <th align='center'>Depart Time</th>
+                        <th align='center'>Arrive back</th>
                         <th align='center'>Purpose</th>
                         <th align='center'>Location</th>
                         <th align='center'>Pax</th>
@@ -71,6 +73,8 @@
                                 <tr>
                                     <td><c:out value="${bookDetail.getBookDate()}"/></td>
                                     <td><c:out value="${bookDetail.getDateNeed()}"/></td>
+                                    <td><c:out value="${bookDetail.getDepart()}"/></td>
+                                    <td><c:out value="${bookDetail.getArriveback()}"/></td>
                                     <td><c:out value="${bookDetail.getPurpose()}"/></td>
                                     <td><c:out value="${bookDetail.getLocation()}"/></td>
                                     <td><c:out value="${bookDetail.getPax()}"/></td>

@@ -46,6 +46,30 @@ public class DaoDriver {
         return status;
     }
     
+    //add driver's scheduling details
+    public static int[] saveSchedule(int id){
+        int[] status = null;
+        try{
+            con = DaoDriver.getConnection();
+            con.setAutoCommit(false);
+            PreparedStatement ps = con.prepareStatement("insert into schedule(driverID, dayID) values(?,?)");
+            
+            for(int dayID = 0; dayID < 6; dayID ++){
+            ps.setInt(1, id);
+            ps.setInt(2, dayID);
+            ps.addBatch();
+            }            
+            
+            status = ps.executeBatch();
+            
+            con.commit();
+        }
+        catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return status;
+    }
+    
     //retrieve driver info
     public static userDriver getDriver(String un){
         userDriver dri = new userDriver();
@@ -98,19 +122,18 @@ public class DaoDriver {
     }
     
     //retrieve username by using userID
-    public static List<userDriver> getFreeDriver(int bookID, int dayID){
+    public static List<userDriver> getFreeDriver(int bookID){
         List<userDriver> listDriver = new ArrayList<userDriver>();
         try{
             con = DaoStaff.getConnection();
             PreparedStatement ps = con.prepareStatement("select driver.driverID, user.fullname, driver.capacity "
                     + "from driver "
-                    + "join user on driver.userID = user.userID "
-                    + "join schedule on driver.driverID = schedule.driverID "
-                    + "where schedule.bookID = ? "
-                    + "and schedule.dayID = ?");
+                    + "join user on user.userID = driver.userID "
+                    + "join schedule on schedule.driverID = driver.driverID "
+                    + "where schedule.bookID is null "
+                    + "or schedule.bookID != ? ");
             
             ps.setInt(1, bookID);
-            ps.setInt(2, dayID);
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){

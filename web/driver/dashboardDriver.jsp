@@ -18,7 +18,7 @@
         
         <style>
             body{
-                background-image: url("img/bg16.jpg");
+                background-image: url("..//img/bg16.jpg");
                 background-size: 100%;
                 background-repeat: no-repeat;
                 color: white;   
@@ -39,7 +39,7 @@
                     <a class="navbar-brand" href="dashboardDriver.jsp" style="color:white">BusUMT</a>
                     <ul class="navbar-nav">
                         <li class="nav-item-active"><a class="nav-link" href="..//processViewProfile">Profile</a></li>
-                        <li class="nav-item-active"><a href="driver/schedule.jsp" class="nav-link">Schedule</a></li>
+                        <li class="nav-item-active"><a href="schedule.jsp" class="nav-link">Schedule</a></li>
                         <li class="nav-item-active" ><a href="#" class="nav-link">|</a></li>
                         <li class="nav-item-active"><a href="..//processLogout" class="nav-link">Logout</a></li>
                     </ul>

@@ -38,7 +38,6 @@ public class processViewDetail extends HttpServlet {
         
         int id = Integer.parseInt(request.getParameter("id"));
         userBooking book = DaoBook.getBookIDDetail(id);
-        
         //get current user's role
         HttpSession session = request.getSession(false);
         String role = (String)session.getAttribute("role");
@@ -48,6 +47,8 @@ public class processViewDetail extends HttpServlet {
         request.setAttribute("username", book.getFullname());
         request.setAttribute("bd", book.getBookDate());
         request.setAttribute("dn", book.getDateNeed());
+        request.setAttribute("depart", book.getDepart());
+        request.setAttribute("ab", book.getArriveback());
         request.setAttribute("purpose", book.getPurpose());
         request.setAttribute("location", book.getLocation());
         request.setAttribute("pax", book.getPax());

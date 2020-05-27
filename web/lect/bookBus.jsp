@@ -38,22 +38,28 @@
                     </ul>
                 </div>
             </nav> 
-        </header> 
-
+        </header>
+        
         <br>
         <div class="container">
             <form class="form-label-group" action="..//processBooking" method="post">
                 <center><h2>Bus Booking Form</h2><br>
                     <div class="form-group"> 
                         <label for="bookingdate">Booking Date</label>
-                        <input type="text" name="bookDate" class="form-control" size="10" placeholder="yyyy/mm/dd" required>
+                        <input type="test" id="bookDate" name="bookDate" class="form-control" size="10" value="" readonly>                       
 
                         <label for="dateneeded">Date Needed</label>
-                        <input type="text" name="dateNeed" class="form-control" size="10" placeholder="yyyy/mm/dd" required>
+                        <input type="date" name="dateNeed" class="form-control" size="10" required>
 
+                        <label for="name">Depart Time</label>
+                        <input type="time" name="depart" class="form-control" size="60" placeholder="Depart Time" required>
+
+                        <label for="name">Arrive back</label>
+                        <input type="time" name="arriveback" class="form-control" size="60" placeholder="Arrive back" required>
+                                                
                         <label for="name">Purpose</label>
                         <input type="text" name="purpose" class="form-control" size="60" placeholder="Purpose" required>
-
+                        
                         <label for="name">Location</label>
                         <input type="text" name="location" class="form-control" size="60" placeholder="Location" required>
 
@@ -64,6 +70,24 @@
                     </div>
                 </center>
             </form>
+            
+            <%--script to get current date of user--%>
+            <script type="text/javascript">
+                date = new Date();
+                year = date.getFullYear();
+                month = date.getMonth()+1;
+                dt = date.getDate();
+
+                if (dt < 10) {
+                  dt = '0' + dt;
+                }
+                if (month < 10) {
+                  month = '0' + month;
+                }
+
+                var d = (year+'-' + month + '-'+dt);      
+                document.getElementById("bookDate").value = d;
+            </script>
         </div>
     </body>
 </html>
