@@ -55,8 +55,8 @@
                     <th onclick="sortTable(2)">Depart time</th>
                     <th onclick="sortTable(2)">Arrive back</th>
                     <th onclick="sortTable(3)">Location</th>
-                    <th onclick="sortTable(4)">Number of Passenger</th>
-                    <th onclick="sortTable(5)">Action</th>
+                    <th>Number of Passenger</th>
+                    <th>Action</th>
                 </tr>  
             </thead>
             <tbody>
