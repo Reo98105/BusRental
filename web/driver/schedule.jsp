@@ -50,9 +50,6 @@
         </header> 
 
         <br>
-    <center>
-        <button class="btn btn-lg btn-warning " onclick="sortTable(0)" style="width: 20%">Sort by A to Z or Z to A</button><br><br>
-    </center>
 
     <div class="container">
         <table class="table table-dark table-striped" id="myTable">
@@ -67,12 +64,54 @@
             </thead>
             <tbody>
                 <tr>
+                    <td>Sunday</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a href="#">Detail</a></td>
+                </tr>
+                <tr>
                     <td>Monday</td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td><a href="#">Detail</a></td>
-                </tr>     
+                </tr> 
+                <tr>
+                    <td>Tuesday</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a href="#">Detail</a></td>
+                </tr> 
+                <tr>
+                    <td>Wednesday</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a href="#">Detail</a></td>
+                </tr> 
+                <tr>
+                    <td>Thursday</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a href="#">Detail</a></td>
+                </tr> 
+                <tr>
+                    <td>Friday</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a href="#">Detail</a></td>
+                </tr> 
+                <tr>
+                    <td>Saturday</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a href="#">Detail</a></td>
+                </tr> 
             </tbody>
         </table>
     </div>
