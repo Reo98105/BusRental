@@ -51,18 +51,20 @@
         
         <br>
         
+        <center>
+        <button class="btn btn-lg btn-warning " onclick="sortTable(0)" style="width: 20%">Sort by A to Z or Z to A</button><br><br>
+        </center>
+        
         <div class="container">
             <table class="table table-dark table-striped">
                 <thead>
                     <tr>
-                        <th align='center'>Booked Date</th>
-                        <th align='center'>Date Needed</th>
-                        <th align='center'>Depart Time</th>
-                        <th align='center'>Arrive back</th>
-                        <th align='center'>Purpose</th>
-                        <th align='center'>Location</th>
-                        <th align='center'>Pax</th>
-                        <th align='center'>Status</th>
+                        <th align='center' onclick="sortTable(1)">Booked Date</th>
+                        <th align='center' onclick="sortTable(2)">Date Needed</th>
+                        <th align='center' onclick="sortTable(3)">Purpose</th>
+                        <th align='center' onclick="sortTable(4)">Location</th>
+                        <th align='center' onclick="sortTable(5)">Pax</th>
+                        <th align='center' onclick="sortTable(6)">Status</th>
                     </tr>  
                 </thead>
                 <tbody>
@@ -119,5 +121,56 @@
                 </tbody>
             </table>
         </div>
+        
+        <script>
+            function sortTable(n) {
+                var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                table = document.getElementById("myTable");
+                switching = true;
+
+                dir = "asc";
+
+                while (switching) {
+
+                    switching = false;
+                    rows = table.rows;
+
+                    for (i = 1; i < (rows.length - 1); i++) {
+
+                        shouldSwitch = false;
+
+                        x = rows[i].getElementsByTagName("TD")[n];
+                        y = rows[i + 1].getElementsByTagName("TD")[n];
+
+                        if (dir == "asc") {
+                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else if (dir == "desc") {
+                            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (shouldSwitch) {
+
+                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                        switching = true;
+
+                        switchcount++;
+                    } else {
+
+                        if (switchcount == 0 && dir == "asc") {
+                            dir = "desc";
+                            switching = true;
+                        }
+                    }
+                }
+            }
+        </script>
     </body>
 </html>
