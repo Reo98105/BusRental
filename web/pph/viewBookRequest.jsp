@@ -42,9 +42,6 @@
             </nav> 
         </header> 
         <br><br>
-    <center>
-        <button class="btn btn-lg btn-warning " onclick="sortTable(0)" style="width: 20%">Sort by A to Z or Z to A</button><br><br>
-    </center>
 
     <div class="container">
         <table class="table table-dark table-striped" id="myTable">
