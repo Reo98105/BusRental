@@ -35,6 +35,7 @@
                     <ul class="navbar-nav">
                         <li class="nav-item-active"><a class="nav-link" href="..//processViewProfile">Profile</a></li>
                         <li class="nav-item-active"><a href="pph/viewBookRequest.jsp" class="nav-link">Bus Booking List</a></li>
+                        <li class="nav-item-active"><a href="chartBookRequest.jsp" class="nav-link">Graph</a></li>
                         <li class="nav-item-active" ><a href="#" class="nav-link">|</a></li>
                         <li class="nav-item-active"><a href="..//processLogout" class="nav-link">Logout</a></li>
                     </ul>
