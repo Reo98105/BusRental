@@ -35,6 +35,7 @@
                     <ul class="navbar-nav">
                         <li class="nav-item-active"><a class="nav-link" href="..//processViewProfile">Profile</a></li>
                         <li class="nav-item-active"><a href="pph/viewBookRequest.jsp" class="nav-link">Bus Booking List</a></li>
+                        <li class="nav-item-active"><a href="chartBookRequest.jsp" class="nav-link">Graph</a></li>
                         <li class="nav-item-active" ><a href="#" class="nav-link">|</a></li>
                         <li class="nav-item-active"><a href="..//processLogout" class="nav-link">Logout</a></li>
                     </ul>
@@ -42,9 +43,6 @@
             </nav> 
         </header> 
         <br><br>
-    <center>
-        <button class="btn btn-lg btn-warning " onclick="sortTable(0)" style="width: 20%">Sort by A to Z or Z to A</button><br><br>
-    </center>
 
     <div class="container">
         <table class="table table-dark table-striped" id="myTable">
