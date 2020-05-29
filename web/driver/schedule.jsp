@@ -50,9 +50,6 @@
         </header> 
 
         <br>
-    <center>
-        <button class="btn btn-lg btn-warning " onclick="sortTable(0)" style="width: 20%">Sort by A to Z or Z to A</button><br><br>
-    </center>
     <center><h2>Driver schedule</h2></center>
     <center><small>*Click detail to view task detail.</small></center>
     <br>
