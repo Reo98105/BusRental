@@ -19,7 +19,7 @@
                 background-repeat: no-repeat;
                 color: white;
             }
-            
+
             .table{
                 size: "60%";
             }
@@ -48,124 +48,133 @@
                 </div>
             </nav> 
         </header>
-        
-        <br>        
-        <div class="container">
-            <table class="table table-dark table-striped">
-                <thead>
-                    <tr>
-                        <th align='center' onclick="sortTable(1)">Booked Date</th>
-                        <th align='center' onclick="sortTable(2)">Date Needed</th>
-                        <th align='center' onclick="sortTable(3)">Purpose</th>
-                        <th align='center' onclick="sortTable(4)">Location</th>
-                        <th align='center' onclick="sortTable(5)">Pax</th>
-                        <th align='center' onclick="sortTable(6)">Status</th>
-                    </tr>  
-                </thead>
-                <tbody>
-                    <jsp:useBean id="book" class="com.rental.dao.DaoBook" scope="page"/>
-                    <c:forEach items="${book.getBookDetailByID(currentUser)}" var="bookDetail">
-                        <c:choose>
-                            <c:when test="${bookDetail.getStatus() eq 0}">
-                                <tr>
-                                    <td><c:out value="${bookDetail.getBookDate()}"/></td>
-                                    <td><c:out value="${bookDetail.getDateNeed()}"/></td>
-                                    <td><c:out value="${bookDetail.getDepart()}"/></td>
-                                    <td><c:out value="${bookDetail.getArriveback()}"/></td>
-                                    <td><c:out value="${bookDetail.getPurpose()}"/></td>
-                                    <td><c:out value="${bookDetail.getLocation()}"/></td>
-                                    <td><c:out value="${bookDetail.getPax()}"/></td>
-                                    <td><c:out value="Pending"/></td>
+        <br>
+    <center><h2>Booking Status</h2></center><br>        
+    <div class="container">
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th align='center' onclick="sortTable(1)">Booked Date</th>
+                    <th align='center' onclick="sortTable(2)">Date Needed</th>
+                    <th align='center' onclick="sortTable(3)">Purpose</th>
+                    <th align='center' onclick="sortTable(4)">Location</th>
+                    <th align='center' onclick="sortTable(5)">Pax</th>
+                    <th align='center' onclick="sortTable(6)">Status</th>
+                </tr>  
+            </thead>
+            <tbody>
+                <jsp:useBean id="book" class="com.rental.dao.DaoBook" scope="page"/>
+                <c:forEach items="${book.getBookDetailByID(currentUser)}" var="bookDetail">
+                    <c:choose>
+                        <c:when test="${bookDetail.getStatus() eq 0}">
+                            <tr>
+                                <td><c:out value="${bookDetail.getBookDate()}"/></td>
+                                <td><c:out value="${bookDetail.getDateNeed()}"/></td>
+                                <td><c:out value="${bookDetail.getPurpose()}"/></td>
+                                <td><c:out value="${bookDetail.getLocation()}"/></td>
+                                <td><c:out value="${bookDetail.getPax()}"/></td>
+                                <td><c:out value="Pending"/> &nbsp;<a href="..//processCancelRequest?id=<c:out value="${bookDetail.getBookID()}"/>">Cancel</a></td>
                             </tr>
-                            </c:when>
-                                
-                            <c:when test="${bookDetail.getStatus() eq 1}">
-                                <tr>
-                                    <td><c:out value="${bookDetail.getBookDate()}"/></td>
-                                    <td><c:out value="${bookDetail.getDateNeed()}"/></td>
-                                    <td><c:out value="${bookDetail.getPurpose()}"/></td>
-                                    <td><c:out value="${bookDetail.getLocation()}"/></td>
-                                    <td><c:out value="${bookDetail.getPax()}"/></td>
-                                    <td><c:out value="Processing"/>
-                                </tr>
-                            </c:when>
-                                
-                            <c:when test="${bookDetail.getStatus() eq 2}">
-                                <tr>
-                                    <td><c:out value="${bookDetail.getBookDate()}"/></td>
-                                    <td><c:out value="${bookDetail.getDateNeed()}"/></td>
-                                    <td><c:out value="${bookDetail.getPurpose()}"/></td>
-                                    <td><c:out value="${bookDetail.getLocation()}"/></td>
-                                    <td><c:out value="${bookDetail.getPax()}"/></td>
-                                    <td><c:out value="Accepted"/> &nbsp;<a href="..//processViewDetail?id=<c:out value="${bookDetail.getBookID()}"/>">Detail..</a></td>
-                                </tr> 
-                            </c:when>
-                                
-                            <c:when test="${bookDetail.getStatus() eq 3}">
-                                <tr>
-                                    <td><c:out value="${bookDetail.getBookDate()}"/></td>
-                                    <td><c:out value="${bookDetail.getDateNeed()}"/></td>
-                                    <td><c:out value="${bookDetail.getPurpose()}"/></td>
-                                    <td><c:out value="${bookDetail.getLocation()}"/></td>
-                                    <td><c:out value="${bookDetail.getPax()}"/></td>
-                                    <td><c:out value="Rejected"/></td>
-                                </tr> 
-                            </c:when>
-                        </c:choose>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </div>
-        
-        <script>
-            function sortTable(n) {
-                var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-                table = document.getElementById("myTable");
-                switching = true;
+                        </c:when>
 
-                dir = "asc";
+                        <c:when test="${bookDetail.getStatus() eq 1}">
+                            <tr>
+                                <td><c:out value="${bookDetail.getBookDate()}"/></td>
+                                <td><c:out value="${bookDetail.getDateNeed()}"/></td>
+                                <td><c:out value="${bookDetail.getPurpose()}"/></td>
+                                <td><c:out value="${bookDetail.getLocation()}"/></td>
+                                <td><c:out value="${bookDetail.getPax()}"/></td>
+                                <td><c:out value="Processing"/>
+                            </tr>
+                        </c:when>
 
-                while (switching) {
+                        <c:when test="${bookDetail.getStatus() eq 2}">
+                            <tr>
+                                <td><c:out value="${bookDetail.getBookDate()}"/></td>
+                                <td><c:out value="${bookDetail.getDateNeed()}"/></td>
+                                <td><c:out value="${bookDetail.getPurpose()}"/></td>
+                                <td><c:out value="${bookDetail.getLocation()}"/></td>
+                                <td><c:out value="${bookDetail.getPax()}"/></td>
+                                <td><c:out value="Accepted"/> &nbsp;<a href="..//processViewDetail?id=<c:out value="${bookDetail.getBookID()}"/>">Detail..</a></td>
+                            </tr> 
+                        </c:when>
 
-                    switching = false;
-                    rows = table.rows;
+                        <c:when test="${bookDetail.getStatus() eq 3}">
+                            <tr>
+                                <td><c:out value="${bookDetail.getBookDate()}"/></td>
+                                <td><c:out value="${bookDetail.getDateNeed()}"/></td>
+                                <td><c:out value="${bookDetail.getPurpose()}"/></td>
+                                <td><c:out value="${bookDetail.getLocation()}"/></td>
+                                <td><c:out value="${bookDetail.getPax()}"/></td>
+                                <td><c:out value="Rejected"/></td>
+                            </tr> 
+                        </c:when>
 
-                    for (i = 1; i < (rows.length - 1); i++) {
+                        <c:when test="${bookDetail.getStatus() eq 4}">
+                            <tr>
+                                <td><c:out value="${bookDetail.getBookDate()}"/></td>
+                                <td><c:out value="${bookDetail.getDateNeed()}"/></td>
+                                <td><c:out value="${bookDetail.getPurpose()}"/></td>
+                                <td><c:out value="${bookDetail.getLocation()}"/></td>
+                                <td><c:out value="${bookDetail.getPax()}"/></td>
+                                <td><c:out value="Canceled"/></td>
+                            </tr> 
+                        </c:when>
+                    </c:choose>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
 
-                        shouldSwitch = false;
+    <script>
+        function sortTable(n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("myTable");
+            switching = true;
 
-                        x = rows[i].getElementsByTagName("TD")[n];
-                        y = rows[i + 1].getElementsByTagName("TD")[n];
+            dir = "asc";
 
-                        if (dir == "asc") {
-                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            while (switching) {
 
-                                shouldSwitch = true;
-                                break;
-                            }
-                        } else if (dir == "desc") {
-                            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                switching = false;
+                rows = table.rows;
 
-                                shouldSwitch = true;
-                                break;
-                            }
+                for (i = 1; i < (rows.length - 1); i++) {
+
+                    shouldSwitch = false;
+
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+
+                            shouldSwitch = true;
+                            break;
                         }
-                    }
-                    if (shouldSwitch) {
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
 
-                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                        switching = true;
-
-                        switchcount++;
-                    } else {
-
-                        if (switchcount == 0 && dir == "asc") {
-                            dir = "desc";
-                            switching = true;
+                            shouldSwitch = true;
+                            break;
                         }
                     }
                 }
+                if (shouldSwitch) {
+
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+
+                    switchcount++;
+                } else {
+
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
             }
-        </script>
-    </body>
+        }
+    </script>
+</body>
 </html>

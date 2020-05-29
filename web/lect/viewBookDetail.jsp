@@ -40,7 +40,8 @@
             </tr>
             <tr>                
                 <th align='left'>Names of driver: </th>
-                <td>                    
+                <td>
+                    <c:set var="bookID" value="${param.id}"/>
                     <jsp:useBean id="bookDao" class="com.rental.dao.DaoBook"/>
                     <c:forEach items="${bookDao.getAssignedDriver(bookID)}" var="list">
                         <c:out value="${list.getFname()}"/><br>

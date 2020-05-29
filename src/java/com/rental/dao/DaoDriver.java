@@ -152,14 +152,16 @@ public class DaoDriver {
         return listDriver;
     }
     
-    public static int updateSchedule(int id, int driID, int dayID){
+    //update schedule by pph
+    public static int updateSchedule(int id, int cond, int driID, int dayID){
         int status = 0;
         try{
             con = DaoDriver.getConnection();
-            PreparedStatement ps = con.prepareStatement("update schedule set bookID = ? where driverID = ? and dayID = ?");
+            PreparedStatement ps = con.prepareStatement("update schedule set bookID = ?, status = ? where driverID = ? and dayID = ?");
             ps.setInt(1, id);
-            ps.setInt(2, driID);
-            ps.setInt(3, dayID);
+            ps.setInt(2, cond);
+            ps.setInt(3, driID);
+            ps.setInt(4, dayID);
             status = ps.executeUpdate();
             
             con.close();
@@ -168,7 +170,26 @@ public class DaoDriver {
             ex.printStackTrace();
         }
         return status;
-    }    
+    }  
+    
+    //update schedule by pph
+    public static int updateScheduleStatus(int cond, String driverID, String bookID){
+        int status = 0;
+        try{
+            con = DaoDriver.getConnection();
+            PreparedStatement ps = con.prepareStatement("update schedule set status = ? where driverID = ? and bookID = ?");
+            ps.setInt(1, cond);
+            ps.setString(2, driverID);
+            ps.setString(3, bookID);
+            status = ps.executeUpdate();
+            
+            con.close();
+        }
+        catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return status;
+    }  
     
     //update driver bus detail
     public static int updateBus(String platNo,int cap, int id, int cond){

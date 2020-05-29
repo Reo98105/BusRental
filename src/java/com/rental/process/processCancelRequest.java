@@ -6,7 +6,6 @@
 package com.rental.process;
 
 import com.rental.dao.DaoBook;
-import com.rental.dao.DaoDriver;
 import com.rental.user.userBooking;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,9 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author type001
+ * @author Teoh
  */
-public class processAssignDriver extends HttpServlet {
+public class processCancelRequest extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,47 +34,38 @@ public class processAssignDriver extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        int id = Integer.parseInt(request.getParameter("id"));
-        int dayID = Integer.parseInt(request.getParameter("dayID"));
-        String[] driverID = request.getParameterValues("driver");
-        int length = driverID.length;
-        int cond = 1;
-        int approval = 2;
+        int bookID = Integer.parseInt(request.getParameter("id"));
+        int approval = 4;   //cancel request code
 
         userBooking book = new userBooking();
+        book.setBookID(bookID);
         book.setStatus(approval);
-        book.setBookID(id);
 
-        int status = 0;
-        for (int i = 0; i < length; i++) {
-            int driID = Integer.parseInt(driverID[i]);
-            status = DaoDriver.updateSchedule(id, cond, driID, dayID);
-        }
-        int status2 = DaoBook.updateDetail(book);
+        int status = DaoBook.updateDetail(book);
         if (status > 0) {
-            if (status2 > 0) {
-                out.println("<script type='text/javascript'>");
-                out.println("alert('Driver successfully assigned!')");
-                out.println("location = 'pph/viewBookRequest.jsp'");
-                out.println("</script>");
-            }
-        } else {
             out.println("<script type='text/javascript'>");
-            out.println("alert('Something went wrong!')");
-            out.println("location = 'pph/viewBookRequest.jsp'");
+            out.println("alert('Request canceled!')");
+            out.println("location = 'processViewStatus'");
             out.println("</script>");
         }
+        else{
+            out.println("<script type='text/javascript'>");
+            out.println("alert('Something went wrong, please contact admin!')");
+            out.println("location = 'processViewStatus'");
+            out.println("</script>");
+        }
+
         try {
             /* TODO output your page here. You may use following sample code. 
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet processAssignDriver</title>");            
+            out.println("<title>Servlet processCancelRequest</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet processAssignDriver at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet processCancelRequest at " + request.getContextPath() + "</h1>");
             out.println("</body>");
-            out.println("</html>");*/
+            out.println("</html>"); */
         } finally {
             out.close();
         }

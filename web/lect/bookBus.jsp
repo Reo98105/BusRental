@@ -31,7 +31,7 @@
                     <a class="navbar-brand" href="lect/dashboardLect.jsp" style="color:white">BusUMT</a>
                     <ul class="navbar-nav">
                         <li class="nav-item-active"><a class="nav-link" href="..//processViewProfile">Profile</a></li>
-                        <li class="nav-item-active"><a href="lect/bookBus.jsp" class="nav-link">Bus Booking </a></li>
+                        <li class="nav-item-active"><a href="bookBus.jsp" class="nav-link">Bus Booking </a></li>
                         <li class="nav-item-active"><a href="..//processViewStatus" class="nav-link">Book Status</a></li>
                         <li class="nav-item-active" ><a href="#" class="nav-link">|</a></li>
                         <li class="nav-item-active"><a href="..//processLogout" class="nav-link">Logout</a></li>

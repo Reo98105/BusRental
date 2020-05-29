@@ -54,7 +54,7 @@
         </table>
             <br>
         <div class="button-container">
-            <form action="processXX" method="post">
+            <form action="..//processUpdateSchedule?id=<c:out value="${param.id}"/>" method="post">
                 <div>
                     <input type="submit" value="Completed"/>
                 </div>

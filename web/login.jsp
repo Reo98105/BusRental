@@ -42,7 +42,7 @@
         <div class="container">
             <form class="form-label-group" action="processLogin" method="post">
                 <div class="form-group">
-                    <h2>Login</h2><br>
+                    <br><h2>Login</h2>
                     <table>
                         <tr>
                             <td colspan="2" style="text-align: center">
@@ -82,14 +82,8 @@
                                 </label>
                             </td>
                         </tr>
-                    </table>
-                    <br>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="remember-me"> Remember me
-                        </label>
-                    </div>
-                    <p>Create Your Account Here <a href="register.jsp">Sign Up</a></p><br><br>
+                    </table><br>
+                    <p>Create Your Account Here <a href="register.jsp">Sign Up</a></p>
                     <button class="btn btn-lg btn-primary btn-block" type="submit" style="width: 25%">Sign in</button>
             </form>
         </div>

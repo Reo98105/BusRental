@@ -52,6 +52,14 @@
         <servlet-name>processAssignDriver</servlet-name>
         <servlet-class>com.rental.process.processAssignDriver</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>processUpdateSchedule</servlet-name>
+        <servlet-class>com.rental.process.processUpdateSchedule</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>processCancelRequest</servlet-name>
+        <servlet-class>com.rental.process.processCancelRequest</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>processRegister</servlet-name>
         <url-pattern>/processRegister</url-pattern>
@@ -108,6 +116,14 @@
     <servlet-mapping>
         <servlet-name>processAssignDriver</servlet-name>
         <url-pattern>/processAssignDriver</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processUpdateSchedule</servlet-name>
+        <url-pattern>/processUpdateSchedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processCancelRequest</servlet-name>
+        <url-pattern>/processCancelRequest</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
