@@ -8,7 +8,6 @@ package com.rental.process;
 
 import com.rental.dao.DaoDriver;
 import com.rental.user.userStaff;
-import com.rental.user.userDriver;
 import com.rental.dao.DaoStaff;
 import java.io.IOException;
 import java.io.PrintWriter;

@@ -43,7 +43,7 @@
             </nav> 
         </header> 
         <br><br>
-        <form action="..//processUpdateDetail" method="post">
+        <form action="..//processAssignDriver" method="post">
             <table border="0" align="center">
                 <tr>
                     <th align="left">Name of Requester: </th>
@@ -74,23 +74,23 @@
                     <td><input type="hidden" name="pax" value="${pax}"/>${pax}</td>
                 </tr>
                 <tr>
-                    <input type="hidden" id="dayID" name="dayID" value=""/>
-                    <script type = "text/javascript">
-                        var dateNeed = document.getElementById("dateNeed").value;
-                        var dt = new Date(dateNeed);
-                        var dayofdate = dt.getDay();
-                        document.getElementById("dayID").value = dayofdate;
-                    </script>
-                    <th align='left'>List of available busses: </th>
-                    <c:set var="count" value="0"/>
+                <input type="hidden" id="dayID" name="dayID" value="test"/>
+                <script type = "text/javascript">
+                    var dateNeed = document.getElementById("dateNeed").value;
+                    var dt = new Date(dateNeed);
+                    var dayofdate = dt.getDay();
+                    document.getElementById("dayID").value = dayofdate;
+                </script>
+                <th align='left'>List of available busses: </th>
+                <td>
                     <c:set var="bookID" value="${param.id}"/>
                     <jsp:useBean id="driDao" class="com.rental.dao.DaoDriver"/>
-                    <c:forEach items="${driDao.getFreeDriver(bookID, dayID)}" var="list">
-                    <input type="checkbox" name="${count}" value="<c:out value="${list.getDriID()}"/>"/>
-                    <label for="${count}"><c:out value="${list.getUsername()}"/></label>  <%--driver name here--%>
-                    <label for="${count}"><c:out value="${list.getCap()}"/></label>  <%--pax here--%>
-                    <c:set var="count" value="${count + 1}"/>
+                    <c:forEach items="${driDao.getFreeDriver(bookID, dayID)}" var="list">              
+                        <input type="checkbox" name="driver" value="<c:out value="${list.getDriID()}"/>"/>&emsp;
+                        <label for="driver"><c:out value="${list.getFname()}"/> </label>&emsp;&emsp;  <%--driver name here--%>
+                        <label for="driver"><c:out value="${list.getCap()}"/> pax</label><br>  <%--pax here--%>
                     </c:forEach>
+                </td>
                 </tr>
             </table>
             <br>

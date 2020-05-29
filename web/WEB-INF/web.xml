@@ -48,6 +48,10 @@
         <servlet-name>processUpdateDri</servlet-name>
         <servlet-class>com.rental.process.processUpdateDri</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>processAssignDriver</servlet-name>
+        <servlet-class>com.rental.process.processAssignDriver</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>processRegister</servlet-name>
         <url-pattern>/processRegister</url-pattern>
@@ -100,6 +104,10 @@
     <servlet-mapping>
         <servlet-name>processUpdateDri</servlet-name>
         <url-pattern>/processUpdateDri</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processAssignDriver</servlet-name>
+        <url-pattern>/processAssignDriver</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

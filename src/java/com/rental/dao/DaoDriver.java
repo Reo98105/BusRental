@@ -8,7 +8,7 @@ package com.rental.dao;
 
 import com.rental.user.userDriver;
 import com.rental.connection.DBConnection;
-import com.rental.user.userBooking;
+import com.rental.user.userSchedule;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -54,7 +54,7 @@ public class DaoDriver {
             con.setAutoCommit(false);
             PreparedStatement ps = con.prepareStatement("insert into schedule(driverID, dayID) values(?,?)");
             
-            for(int dayID = 0; dayID < 6; dayID ++){
+            for(int dayID = 0; dayID < 7; dayID ++){
             ps.setInt(1, id);
             ps.setInt(2, dayID);
             ps.addBatch();
@@ -68,14 +68,15 @@ public class DaoDriver {
             ex.printStackTrace();
         }
         return status;
-    }
-    
+    }   
+        
     //retrieve driver info
     public static userDriver getDriver(String un){
         userDriver dri = new userDriver();
         try{
             con = DaoDriver.getConnection();
-            PreparedStatement ps = con.prepareStatement("select driver.driverID, user.fullname, user.role, driver.plateNo, driver.capacity from driver "
+            PreparedStatement ps = con.prepareStatement("select driver.driverID, user.fullname, user.role, driver.plateNo, driver.capacity "
+                    + "from driver "
                     + "join user on user.userID = driver.userID "
                     + "where user.username = ?");
             
@@ -122,18 +123,18 @@ public class DaoDriver {
     }
     
     //retrieve username by using userID
-    public static List<userDriver> getFreeDriver(int bookID){
+    public static List<userDriver> getFreeDriver(int bookID, int dayID){
         List<userDriver> listDriver = new ArrayList<userDriver>();
         try{
-            con = DaoStaff.getConnection();
+            con = DaoDriver.getConnection();
             PreparedStatement ps = con.prepareStatement("select driver.driverID, user.fullname, driver.capacity "
                     + "from driver "
                     + "join user on user.userID = driver.userID "
                     + "join schedule on schedule.driverID = driver.driverID "
-                    + "where schedule.bookID is null "
-                    + "or schedule.bookID != ? ");
+                    + "where schedule.dayID = ? "
+                    + "and schedule.status = 0");
             
-            ps.setInt(1, bookID);
+            ps.setInt(1, dayID);
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
@@ -151,36 +152,29 @@ public class DaoDriver {
         return listDriver;
     }
     
-    //retrieve Sunday's schedule
-    public static userBooking getSunDetail(int id){
-        userBooking book = new userBooking();
-        
+    public static int updateSchedule(int id, int driID, int dayID){
+        int status = 0;
         try{
-            con = DaoBook.getConnection();
-            PreparedStatement ps = con.prepareStatement("select day.day, book.bookDateNeed, book.depart, book.arriveback, book.location "
-                    + "from schedule s "
-                    + "join bookdetail book on s.bookID = book.bookID "
-                    + "join driver on s.driverID = driver.driverID "
-                    + "join dayofweek day on s.dayID = day.dayID "
-                    + "where s.driverID = ?");
+            con = DaoDriver.getConnection();
+            PreparedStatement ps = con.prepareStatement("update schedule set bookID = ? where driverID = ? and dayID = ?");
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
+            ps.setInt(2, driID);
+            ps.setInt(3, dayID);
+            status = ps.executeUpdate();
             
-            if(rs.next()){
-                book.setFullname(rs.getString("fullname"));
-            }
+            con.close();
         }
-        catch(SQLException e){
-            e.printStackTrace();
+        catch(SQLException ex){
+            ex.printStackTrace();
         }
-        return book;
-    }
+        return status;
+    }    
     
     //update driver bus detail
     public static int updateBus(String platNo,int cap, int id, int cond){
         int status = 0;
         try{
-            con = DaoStaff.getConnection();
+            con = DaoDriver.getConnection();
             PreparedStatement ps = con.prepareStatement("update driver set plateNo = ?, capacity = ?, status = ? "
                     + "where driverID = ?");
             ps.setString(1, platNo);
@@ -196,5 +190,38 @@ public class DaoDriver {
             e.printStackTrace();
         }
         return status;
+    }
+    
+    //retrieve schedule's detail
+    public static List<userSchedule> getSchedule(String id){
+        List<userSchedule> listSchedule = new ArrayList<userSchedule>();
+        try{
+            con = DaoDriver.getConnection();
+            PreparedStatement ps = con.prepareStatement("select schedule.bookID, dayofweek.day, bookdetail.bookDateNeed, bookdetail.depart, bookdetail.arriveback, bookdetail.location, schedule.status "
+                    + "from schedule "
+                    + "left outer join bookdetail on schedule.bookID = bookdetail.bookID "
+                    + "right outer join dayofweek on schedule.dayID = dayofweek.dayID "
+                    + "where driverID = ?");
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                userSchedule schedule = new userSchedule();
+                schedule.setBookID(rs.getString("bookID"));
+                schedule.setDay(rs.getString("day"));
+                schedule.setDate(rs.getString("bookDateNeed"));
+                schedule.setDepart(rs.getString("depart"));
+                schedule.setArriveback(rs.getString("arriveback"));
+                schedule.setLocation(rs.getString("location"));
+                schedule.setStatus(rs.getInt("status"));
+                listSchedule.add(schedule);
+            }
+            
+            con.close();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return listSchedule;
     }
 }

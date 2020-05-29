@@ -8,6 +8,7 @@ package com.rental.dao;
 
 import com.rental.user.userBooking;
 import com.rental.connection.DBConnection;
+import com.rental.user.userDriver;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -70,6 +71,7 @@ public class DaoBook {
             
             while(rs.next()){
                 userBooking book = new userBooking();
+                book.setBookID(rs.getInt("bookID"));
                 book.setBookdate(rs.getString("bookDate"));
                 book.setDateNeed(rs.getString("bookDateNeed"));
                 book.setDepart(rs.getString("depart"));
@@ -181,7 +183,6 @@ public class DaoBook {
                 book.setDateNeed(rs.getString("bookDateNeed"));
                 book.setLocation(rs.getString("location"));
                 book.setPax(rs.getInt("pax"));
-                book.setStatus(rs.getInt("approval"));
                 listBook.add(book);
             }
         }
@@ -189,5 +190,30 @@ public class DaoBook {
             e.printStackTrace();
         }
         return listBook;
+    }
+    
+    //retrieve driver that assigned
+     public static List<userDriver> getAssignedDriver(int bookID){
+        List<userDriver> listDriver = new ArrayList<userDriver>();
+        try{
+            con = DaoStaff.getConnection();
+            PreparedStatement ps = con.prepareStatement("select user.fullname "
+                    + "from driver join user on user.userID = driver.userID "
+                    + "join schedule on schedule.driverID = driver.driverID "
+                    + "where schedule.bookID = ?");
+            ps.setInt(1, bookID);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                userDriver dri = new userDriver();
+                dri.setFname(rs.getString("fullname"));
+                listDriver.add(dri);
+            }
+            con.close();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return listDriver;
     }
 }

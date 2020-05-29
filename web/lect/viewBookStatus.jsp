@@ -102,7 +102,7 @@
                                     <td><c:out value="${bookDetail.getPurpose()}"/></td>
                                     <td><c:out value="${bookDetail.getLocation()}"/></td>
                                     <td><c:out value="${bookDetail.getPax()}"/></td>
-                                    <td><c:out value="Accepted"/> &nbsp;<a href="#">Detail..</a></td>
+                                    <td><c:out value="Accepted"/> &nbsp;<a href="..//processViewDetail?id=<c:out value="${bookDetail.getBookID()}"/>">Detail..</a></td>
                                 </tr> 
                             </c:when>
                                 

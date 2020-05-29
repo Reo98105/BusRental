@@ -52,8 +52,6 @@
                 <tr>
                     <th onclick="sortTable(1)">Name of Requester</th>
                     <th onclick="sortTable(2)">Date Needed</th>
-                    <th onclick="sortTable(2)">Depart time</th>
-                    <th onclick="sortTable(2)">Arrive back</th>
                     <th onclick="sortTable(3)">Location</th>
                     <th>Number of Passenger</th>
                     <th>Action</th>
@@ -62,20 +60,14 @@
             <tbody>
                 <c:out value="${bookDetail.getFullname()}"/>
                 <jsp:useBean id="book" class="com.rental.dao.DaoBook" scope="page"/>
-                <c:forEach items="${book.getBookDetail()}" var="bookDetail">                 
-                    <c:choose>
-                        <c:when test="${bookDetail.getStatus() eq 1}">
-                            <tr>
-                                <td><c:out value="${bookDetail.getFullname()}"/></td>
-                                <td><c:out value="${bookDetail.getDateNeed()}"/></td>
-                                <td><c:out value="${bookDetail.getDepart()}"/></td>
-                                <td><c:out value="${bookDetail.getArriveback()}"/></td>
-                                <td><c:out value="${bookDetail.getLocation()}"/></td>
-                                <td><c:out value="${bookDetail.getPax()}"/></td>
-                                <td><a href='..//processViewDetail?id=<c:out value="${bookDetail.getBookID()}"/>'>Assign Driver</a></td>
-                            </tr>
-                        </c:when>
-                    </c:choose>
+                <c:forEach items="${book.getBookDetail()}" var="bookDetail">
+                    <tr>
+                        <td><c:out value="${bookDetail.getFullname()}"/></td>
+                        <td><c:out value="${bookDetail.getDateNeed()}"/></td>
+                        <td><c:out value="${bookDetail.getLocation()}"/></td>
+                        <td><c:out value="${bookDetail.getPax()}"/></td>
+                        <td><a href='..//processViewDetail?id=<c:out value="${bookDetail.getBookID()}"/>'>Assign Driver</a></td>
+                    </tr>
                 </c:forEach>
             </tbody>
         </table>

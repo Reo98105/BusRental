@@ -6,21 +6,20 @@
 package com.rental.process;
 
 import com.rental.dao.DaoBook;
+import com.rental.dao.DaoDriver;
 import com.rental.user.userBooking;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Reo
+ * @author type001
  */
-public class processViewDetail extends HttpServlet {
+public class processAssignDriver extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,56 +36,42 @@ public class processViewDetail extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         int id = Integer.parseInt(request.getParameter("id"));
-        userBooking book = DaoBook.getBookIDDetail(id);
-        //get current user's role
-        HttpSession session = request.getSession(false);
-        String role = (String)session.getAttribute("role");
+        int dayID = Integer.parseInt(request.getParameter("dayID"));
+        String[] driverID = request.getParameterValues("driver");
+        int length = driverID.length;
+        int approval = 2;
         
-        //forward data get from database to intended page
-        request.setAttribute("bookID", id);
-        request.setAttribute("username", book.getFullname());
-        request.setAttribute("bd", book.getBookDate());
-        request.setAttribute("dn", book.getDateNeed());
-        request.setAttribute("depart", book.getDepart());
-        request.setAttribute("ab", book.getArriveback());
-        request.setAttribute("purpose", book.getPurpose());
-        request.setAttribute("location", book.getLocation());
-        request.setAttribute("pax", book.getPax());
+        userBooking book = new userBooking();
+        book.setStatus(approval);
+        book.setBookID(id);
         
-        if(role.equals("hepa")){
-            RequestDispatcher rd = request.getRequestDispatcher("hepa/viewRequestDetail.jsp");
-            if(rd != null){
-                rd.forward(request, response);
-            }
+        int status = 0;
+        for (int i = 0; i < length; i++){
+            int driID = Integer.parseInt(driverID[i]);
+            status = DaoDriver.updateSchedule(id, driID, dayID);
         }
-        else if(role.equals("pph")){
-            RequestDispatcher rd = request.getRequestDispatcher("pph/viewRequestDetail.jsp");
-            if(rd != null){
-                rd.forward(request, response);
-            }
+        int status2 = DaoBook.updateDetail(book);
+        if(status > 0){
+            out.println("<script type='text/javascript'>");
+            out.println("alert('Driver successfully assigned!')");
+            out.println("location = 'pph/viewBookRequest.jsp'");
+            out.println("</script>");
         }
-        else if(role.equals("lecturer")){
-            RequestDispatcher rd = request.getRequestDispatcher("lect/viewBookDetail.jsp");
-            if(rd != null){
-                rd.forward(request, response);
-            }
+        else{
+            out.println("<script type='text/javascript'>");
+            out.println("alert('Something went wrong!')");
+            out.println("location = 'pph/viewBookRequest.jsp'");
+            out.println("</script>");
         }
-        else if(role.equals("driver")){
-            RequestDispatcher rd = request.getRequestDispatcher("driver/viewEditSchedule.jsp");
-            if(rd != null){
-                rd.forward(request, response);
-            }
-        }        
-        
         try {
-            /* TODO output your page here. You may use following sample code.
+            /* TODO output your page here. You may use following sample code. 
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet processViewDetail</title>");            
+            out.println("<title>Servlet processAssignDriver</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet processViewDetail at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet processAssignDriver at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");*/
         }
