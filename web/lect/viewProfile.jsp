@@ -49,7 +49,7 @@
         <br>
         <table>
             <tr>
-                <td><h6><label for="username">Username</label></h6></td>
+                <td><h6><label for="username">Username:</label></h6></td>
                 <td>${username}</td>
 
             </tr>
