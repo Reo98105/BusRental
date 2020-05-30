@@ -14,7 +14,7 @@
 
         <style>
             body{
-                background-image: url("..//img/bg17.jpg");
+                background-image: url("..//img/bg18.jpg");
                 background-size: 100%;
                 background-repeat: no-repeat;
                 color: white;
