@@ -63,6 +63,7 @@
                     <th onclick="sortTable(4)">Return time</th>
                     <th onclick="sortTable(5)">Location</th>
                     <th>Action</th>
+                    <th>Details</th>
                 </tr>  
             </thead>
             <tbody>
@@ -79,13 +80,15 @@
                                 <td>-</td>
                                 <td>-</td>
                                 <td>-</td>
+                                <td>-</td>
                             </c:when>
                             <c:when test="${list.getStatus() eq '1'}">
                                 <td><c:out value="${list.getDate()}"/></td>
                                 <td><c:out value="${list.getDepart()}"/></td>
                                 <td><c:out value="${list.getArriveback()}"/></td>
                                 <td><c:out value="${list.getLocation()}"/></td>
-                                <td>Not complete &emsp;<a href="..//processViewDetail?id=<c:out value="${list.getBookID()}"/>">Detail</a></td>
+                                <td>Not complete</td>
+                                <td><a href="..//processViewDetail?id=<c:out value="${list.getBookID()}"/>">Details...</a></td>
                             </c:when>
                             <c:otherwise>
                                 <td><c:out value="${list.getDate()}"/></td>
@@ -93,6 +96,7 @@
                                 <td><c:out value="${list.getArriveback()}"/></td>
                                 <td><c:out value="${list.getLocation()}"/></td>
                                 <td>Completed</td>
+                                <td>-</td>
                             </c:otherwise>
                         </c:choose>
                     </tr>
