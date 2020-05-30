@@ -40,6 +40,7 @@
                 </div>
             </nav> 
         </header>
+	<br>
     <center>
         <div class="container">
             <form class="form-label-group" action="processRegister" method="post">
