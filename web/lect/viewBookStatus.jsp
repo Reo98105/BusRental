@@ -60,6 +60,7 @@
                     <th align='center' onclick="sortTable(4)">Location</th>
                     <th align='center' onclick="sortTable(5)">Pax</th>
                     <th align='center' onclick="sortTable(6)">Status</th>
+                    <th align='center'>Details</th>
                 </tr>  
             </thead>
             <tbody>
@@ -73,7 +74,8 @@
                                 <td><c:out value="${bookDetail.getPurpose()}"/></td>
                                 <td><c:out value="${bookDetail.getLocation()}"/></td>
                                 <td><c:out value="${bookDetail.getPax()}"/></td>
-                                <td><c:out value="Pending"/> &nbsp;<a href="..//processCancelRequest?id=<c:out value="${bookDetail.getBookID()}"/>">Cancel</a></td>
+                                <td><c:out value="Pending"/></td>
+                                <td><a href="..//processCancelRequest?id=<c:out value="${bookDetail.getBookID()}"/>">Cancel</a></td>
                             </tr>
                         </c:when>
 
@@ -85,6 +87,7 @@
                                 <td><c:out value="${bookDetail.getLocation()}"/></td>
                                 <td><c:out value="${bookDetail.getPax()}"/></td>
                                 <td><c:out value="Processing"/>
+                                <td></td>
                             </tr>
                         </c:when>
 
@@ -95,7 +98,8 @@
                                 <td><c:out value="${bookDetail.getPurpose()}"/></td>
                                 <td><c:out value="${bookDetail.getLocation()}"/></td>
                                 <td><c:out value="${bookDetail.getPax()}"/></td>
-                                <td><c:out value="Accepted"/> &nbsp;<a href="..//processViewDetail?id=<c:out value="${bookDetail.getBookID()}"/>">Detail..</a></td>
+                                <td><c:out value="Accepted"/></td>
+                                <td><a href="..//processViewDetail?id=<c:out value="${bookDetail.getBookID()}"/>">Detail..</a></td>
                             </tr> 
                         </c:when>
 
@@ -107,6 +111,7 @@
                                 <td><c:out value="${bookDetail.getLocation()}"/></td>
                                 <td><c:out value="${bookDetail.getPax()}"/></td>
                                 <td><c:out value="Rejected"/></td>
+                                <td></td>
                             </tr> 
                         </c:when>
 
@@ -118,6 +123,7 @@
                                 <td><c:out value="${bookDetail.getLocation()}"/></td>
                                 <td><c:out value="${bookDetail.getPax()}"/></td>
                                 <td><c:out value="Canceled"/></td>
+                                <td></td>
                             </tr> 
                         </c:when>
                     </c:choose>
