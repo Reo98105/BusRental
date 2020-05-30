@@ -62,7 +62,7 @@
 
         <br><br>
     <center>
-        <table border="1">
+        <table>
             <tr>
                 <th><h6>Name of Requester:</h6></th>
                 <td><input type="hidden" name="id" value="${bookID}"/>${username}</td>
