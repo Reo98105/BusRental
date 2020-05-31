@@ -5,9 +5,10 @@ package com.rental.process;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import com.rental.dao.DaoDriver;
 import com.rental.user.userStaff;
 import com.rental.dao.DaoStaff;
+import com.rental.user.userDriver;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -36,56 +37,57 @@ public class processViewUpdate extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
+
         HttpSession session = request.getSession(false);
-        String currentUser = (String)session.getAttribute("un");
-        String currentRole = (String)session.getAttribute("role");
-        
-        if(currentRole.equals("driver")){
-            //userDriver dri = DaoDriver.getUser(currentUser);
-            
-            /*RequestDispatcher rd = request.getRequestDispatcher("driver/viewUpdatePass.jsp");
-            if(rd != null){
+        String currentUser = (String) session.getAttribute("un");
+        String currentRole = (String) session.getAttribute("role");
+
+        if (currentRole.equals("driver")) {
+            userDriver dri = DaoDriver.getDriver(currentUser);
+
+            request.setAttribute("username", currentUser);
+            request.setAttribute("name", dri.getFname());
+            request.setAttribute("role", dri.getRole());
+            request.setAttribute("cap", dri.getCap());
+            RequestDispatcher rd = request.getRequestDispatcher("driver/viewUpdatePass.jsp");
+            if (rd != null) {
                 rd.forward(request, response);
-            }*/
-        }
-        else if(currentRole.equals("pph")){
+            }
+        } else if (currentRole.equals("pph")) {
             userStaff staff = DaoStaff.getUser(currentUser);
-            
-            request.setAttribute("username",staff.getUsername());
-            request.setAttribute("name",staff.getName());
-            request.setAttribute("role",staff.getRole());
-            
+
+            request.setAttribute("username", staff.getUsername());
+            request.setAttribute("name", staff.getName());
+            request.setAttribute("role", staff.getRole());
+
             RequestDispatcher rd = request.getRequestDispatcher("pph/viewUpdatePass.jsp");
-            if(rd != null){
+            if (rd != null) {
                 rd.forward(request, response);
             }
-        }
-        else if(currentRole.equals("hepa")){
+        } else if (currentRole.equals("hepa")) {
             userStaff staff = DaoStaff.getUser(currentUser);
-            
-            request.setAttribute("username",staff.getUsername());
-            request.setAttribute("name",staff.getName());
-            request.setAttribute("role",staff.getRole());
-            
+
+            request.setAttribute("username", staff.getUsername());
+            request.setAttribute("name", staff.getName());
+            request.setAttribute("role", staff.getRole());
+
             RequestDispatcher rd = request.getRequestDispatcher("hepa/viewUpdatePass.jsp");
-            if(rd != null){
+            if (rd != null) {
                 rd.forward(request, response);
             }
-        }
-        else if(currentRole.equals("lecturer")){
+        } else if (currentRole.equals("lecturer")) {
             userStaff staff = DaoStaff.getUser(currentUser);
-            
-            request.setAttribute("username",staff.getUsername());
-            request.setAttribute("name",staff.getName());
-            request.setAttribute("role",staff.getRole());
-            
+
+            request.setAttribute("username", staff.getUsername());
+            request.setAttribute("name", staff.getName());
+            request.setAttribute("role", staff.getRole());
+
             RequestDispatcher rd = request.getRequestDispatcher("lect/viewUpdatePass.jsp");
-            if(rd != null){
+            if (rd != null) {
                 rd.forward(request, response);
             }
         }
-        
+
         try {
             /* TODO output your page here. You may use following sample code. 
             out.println("<!DOCTYPE html>");
@@ -97,8 +99,7 @@ public class processViewUpdate extends HttpServlet {
             out.println("<h1>Servlet processViewUpdate at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>"); */
-        }
-        finally{
+        } finally {
             out.close();
         }
     }

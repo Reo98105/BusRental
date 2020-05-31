@@ -58,7 +58,7 @@
             </tr>
             <tr>
                 <td><h6><label for="fullname">Fullname:</label></h6></td>
-                <td>${name}</td>
+                <td>${fname}</td>
             </tr>
             <tr>
                 <td><h6><label for="role">Role:</label></h6></td>

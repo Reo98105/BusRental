@@ -65,7 +65,10 @@ public class DaoBook {
         
         try{
             con = DaoBook.getConnection();
-            PreparedStatement ps = con.prepareStatement("select * from bookdetail where userID = ?");
+            PreparedStatement ps = con.prepareStatement("select * "
+                    + "from bookdetail "
+                    + "where userID = ? "
+                    + "order by bookDate desc");
             ps.setString(1, un);
             ResultSet rs = ps.executeQuery();
             
@@ -97,7 +100,8 @@ public class DaoBook {
             con = DaoBook.getConnection();
             PreparedStatement ps = con.prepareStatement("select user.fullname ,bookdetail.bookID, bookdetail.bookDate, bookdetail.purpose, bookdetail.approval "
                     + "from bookdetail inner join user on user.userID = bookdetail.userID "
-                    + "where bookdetail.approval = '0'");
+                    + "where bookdetail.approval = '0' "
+                    + "order by bookDate desc");
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
@@ -172,8 +176,10 @@ public class DaoBook {
         try{
             con = DaoBook.getConnection();
             PreparedStatement ps = con.prepareStatement("select user.fullname, bookdetail.bookID, bookdetail.bookDateNeed, bookdetail.location, bookdetail.pax, bookdetail.approval "
-                    + "from bookdetail inner join user on user.userID = bookdetail.userID "
-                    + "where bookdetail.approval = '1'");
+                    + "from bookdetail "
+                    + "inner join user on user.userID = bookdetail.userID "
+                    + "where bookdetail.approval = '1' "
+                    + "order by bookDate desc");
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){

@@ -46,8 +46,9 @@ public class processViewProfile extends HttpServlet {
         
         if(currentRole.equals("driver")){
             userDriver dri = DaoDriver.getDriver(currentUser);
+            userStaff staff = DaoStaff.getUser(currentUser);
             
-            request.setAttribute("username",dri.getUsername());
+            request.setAttribute("username",staff.getUsername());
             request.setAttribute("fname",dri.getFname());
             request.setAttribute("role",dri.getRole());
             request.setAttribute("platNo",dri.getPlat());

@@ -70,6 +70,12 @@
                         <td>${role}</td>
                     </tr>
                     <tr>
+                        <td align-text="left">
+                            <label for="role">Bus Capacity:</label>
+                        </td>
+                        <td>${cap}</td>
+                    </tr>
+                    <tr>
                         <td colspan="2">
                             <label for="current" >Current Password</label>
                             <input type="password" name="current"  class="form-control" size="20" placeholder="Current Password" required><br>
