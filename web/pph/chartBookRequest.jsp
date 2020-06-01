@@ -1,4 +1,8 @@
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -31,7 +35,7 @@
             </nav> 
         </header>
 
-        <br>
+        <br>      
         <div class="container">
             <canvas id="myChart"> </canvas>
         </div>
@@ -51,20 +55,20 @@
                     datasets: [{
                             label: 'Total Book',
                             data: [
-                                30,
-                                14,
-                                19,
-                                24,
-                                32,
-                                8,
-                                12,
-                                15,
-                                17,
-                                25,
-                                26,
+                                0,
+                                0,
+                                0,
+                                0,
                                 5,
-                                10,
-                                4
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
                             ],
                             backgroundColor: [
                                 'rgb(219, 24, 219)',
@@ -88,20 +92,20 @@
                         }, {
                             label: 'Accepted',
                             data: [
-                                15,
-                                10,
-                                12,
-                                20,
-                                22,
-                                8,
-                                10,
-                                15,
-                                12,
-                                20,
-                                16,
-                                5,
-                                8,
-                                2  
+                                0,
+                                0,
+                                0,
+                                0,
+                                3,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0  
                             ],
                             backgroundColor: [
                                 'rgb(127,255,0)',
@@ -124,20 +128,20 @@
                         }, {
                             label: 'Rejected',
                             data: [
-                                15,
-                                4,
-                                7,
-                                4,
-                                10,
+                                0,
+                                0,
+                                0,
                                 0,
                                 2,
                                 0,
-                                5,
-                                5,
-                                10,
                                 0,
-                                2,
-                                2 
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0 
                             ],
                             backgroundColor: [
                                 'rgb(220,20,60)',
