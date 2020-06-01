@@ -5,7 +5,6 @@ package com.rental.dao;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import com.rental.user.userBooking;
 import com.rental.connection.DBConnection;
 import com.rental.user.userDriver;
@@ -16,30 +15,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author Reo
  */
 public class DaoBook {
-    
+
     private static Connection con;
-    
+
     //get connection info from DBConnection
-    public static Connection getConnection(){
+    public static Connection getConnection() {
         con = DBConnection.getConnection();
         return con;
     }
-    
+
     //add book info into bookDetail
-    public static int save(userBooking ubook){
+    public static int save(userBooking ubook) {
         int status = 0;
-        try{
+        try {
             con = DaoBook.getConnection();
             PreparedStatement ps = con.prepareStatement("insert into bookdetail "
                     + "(userID, bookDate, bookDateNeed, depart, arriveback, purpose, location, pax) "
                     + "values(?,?,?,?,?,?,?,?) ");
-            
+
             ps.setInt(1, ubook.getID());
             ps.setString(2, ubook.getBookDate());
             ps.setString(3, ubook.getDateNeed());
@@ -48,22 +46,21 @@ public class DaoBook {
             ps.setString(6, ubook.getPurpose());
             ps.setString(7, ubook.getLocation());
             ps.setInt(8, ubook.getPax());
-            
+
             status = ps.executeUpdate();
-            
+
             con.close();
-        }
-        catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return status;
     }
-    
+
     //retrieve all booked details from particular userID (for user)
-    public static List<userBooking> getBookDetailByID(String un){
+    public static List<userBooking> getBookDetailByID(String un) {
         List<userBooking> listBook = new ArrayList<userBooking>();
-        
-        try{
+
+        try {
             con = DaoBook.getConnection();
             PreparedStatement ps = con.prepareStatement("select * "
                     + "from bookdetail "
@@ -71,8 +68,8 @@ public class DaoBook {
                     + "order by bookDate desc");
             ps.setString(1, un);
             ResultSet rs = ps.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 userBooking book = new userBooking();
                 book.setBookID(rs.getInt("bookID"));
                 book.setBookdate(rs.getString("bookDate"));
@@ -85,26 +82,25 @@ public class DaoBook {
                 book.setStatus(rs.getInt("approval"));
                 listBook.add(book);
             }
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return listBook;
     }
-    
+
     //partially retrieve all user request (hepa view)
-    public static List<userBooking> getPartBookDetail(){
+    public static List<userBooking> getPartBookDetail() {
         List<userBooking> listBook = new ArrayList<userBooking>();
-        
-        try{
+
+        try {
             con = DaoBook.getConnection();
             PreparedStatement ps = con.prepareStatement("select user.fullname ,bookdetail.bookID, bookdetail.bookDate, bookdetail.purpose, bookdetail.approval "
                     + "from bookdetail inner join user on user.userID = bookdetail.userID "
                     + "where bookdetail.approval = '0' "
                     + "order by bookDate desc");
             ResultSet rs = ps.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 userBooking book = new userBooking();
                 book.setBookID(rs.getInt("bookID"));
                 book.setFullname(rs.getString("fullname"));
@@ -113,26 +109,25 @@ public class DaoBook {
                 book.setStatus(rs.getInt("approval"));
                 listBook.add(book);
             }
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return listBook;
     }
-    
+
     //retrieve all details from particular bookID (for hepa edit)
-    public static userBooking getBookIDDetail(int id){
+    public static userBooking getBookIDDetail(int id) {
         userBooking book = new userBooking();
-        
-        try{
+
+        try {
             con = DaoBook.getConnection();
             PreparedStatement ps = con.prepareStatement("select user.fullname , bookdetail.bookDate, bookdetail.bookDateNeed, bookdetail.depart, bookdetail.arriveback, bookdetail.purpose, bookdetail.location, bookdetail.pax, bookdetail.approval "
                     + "from bookdetail inner join user on user.userID = bookdetail.userID "
                     + "where bookdetail.bookID = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 book.setFullname(rs.getString("fullname"));
                 book.setBookdate(rs.getString("bookDate"));
                 book.setDateNeed(rs.getString("bookDateNeed"));
@@ -143,37 +138,35 @@ public class DaoBook {
                 book.setPax(rs.getInt("pax"));
                 book.setStatus(rs.getInt("approval"));
             }
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return book;
     }
-    
+
     //update booking detail's approval
-    public static int updateDetail(userBooking book){
+    public static int updateDetail(userBooking book) {
         int status = 0;
-        try{
+        try {
             con = DaoBook.getConnection();
             PreparedStatement ps = con.prepareStatement("update bookdetail set approval = ? where bookID = ?");
-            ps.setInt(1, book.getStatus()); 
-            ps.setInt(2, book.getBookID());     
-            
+            ps.setInt(1, book.getStatus());
+            ps.setInt(2, book.getBookID());
+
             status = ps.executeUpdate();
-            
+
             con.close();
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return status;
     }
-    
+
     //retrieve all user request (pph view)
-    public static List<userBooking> getBookDetail(){
+    public static List<userBooking> getBookDetail() {
         List<userBooking> listBook = new ArrayList<userBooking>();
-        
-        try{
+
+        try {
             con = DaoBook.getConnection();
             PreparedStatement ps = con.prepareStatement("select user.fullname, bookdetail.bookID, bookdetail.bookDateNeed, bookdetail.location, bookdetail.pax, bookdetail.approval "
                     + "from bookdetail "
@@ -181,8 +174,8 @@ public class DaoBook {
                     + "where bookdetail.approval = '1' "
                     + "order by bookDate desc");
             ResultSet rs = ps.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 userBooking book = new userBooking();
                 book.setBookID(rs.getInt("bookID"));
                 book.setFullname(rs.getString("fullname"));
@@ -191,17 +184,16 @@ public class DaoBook {
                 book.setPax(rs.getInt("pax"));
                 listBook.add(book);
             }
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return listBook;
     }
-    
+
     //retrieve driver that assigned
-     public static List<userDriver> getAssignedDriver(int bookID){
+    public static List<userDriver> getAssignedDriver(int bookID) {
         List<userDriver> listDriver = new ArrayList<userDriver>();
-        try{
+        try {
             con = DaoStaff.getConnection();
             PreparedStatement ps = con.prepareStatement("select user.fullname "
                     + "from driver join user on user.userID = driver.userID "
@@ -209,17 +201,80 @@ public class DaoBook {
                     + "where schedule.bookID = ?");
             ps.setInt(1, bookID);
             ResultSet rs = ps.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 userDriver dri = new userDriver();
                 dri.setFname(rs.getString("fullname"));
                 listDriver.add(dri);
             }
             con.close();
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return listDriver;
+    }
+
+    //get total number of booking from db where month is specified
+    public static userBooking getTotalRequest(int month) {
+        userBooking book = new userBooking();
+
+        try {
+            con = DaoBook.getConnection();
+            PreparedStatement ps = con.prepareStatement("select count(bookDate) "
+                    + "from bookDetail "
+                    + "where month(bookDate) = ?");
+            ps.setInt(1, month);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()){
+                book.setCount(rs.getInt("count(bookDate)"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return book;
+    }
+
+    //get total number of booking from db where month is specified
+    public static userBooking getAccept(int month) {
+        userBooking book = new userBooking();
+
+        try {
+            con = DaoBook.getConnection();
+            PreparedStatement ps = con.prepareStatement("select count(bookDate) "
+                    + "from bookDetail "
+                    + "where month(bookDate) = ? "
+                    + "and approval = 2");
+            ps.setInt(1, month);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()){
+                book.setCount(rs.getInt("count(bookDate)"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return book;
+    }
+
+    //get total number of booking from db where month is specified
+    public static userBooking getReject(int month) {
+        userBooking book = new userBooking();
+        try {
+            con = DaoBook.getConnection();
+            PreparedStatement ps = con.prepareStatement("select count(bookDate) "
+                    + "from bookDetail "
+                    + "where month(bookDate) = ? "
+                    + "and approval = 3");
+            ps.setInt(1, month);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()){
+                book.setCount(rs.getInt("count(bookDate)"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return book;
     }
 }

@@ -12,7 +12,7 @@ package com.rental.user;
  */
 public class userBooking {
     private String  bookDate, dateNeed, depart, arriveback, purpose, location, fullname;
-    private int id, pax, status, bookID;
+    private int id, pax, status, bookID, count;
 
     public String getBookDate(){
         return bookDate;
@@ -100,5 +100,13 @@ public class userBooking {
     
     public void setFullname(String fullname){
         this.fullname = fullname;
+    }
+    
+    public int getCount(){
+        return count;
+    }
+    
+    public void setCount(int count){
+        this.count = count;
     }
 }
